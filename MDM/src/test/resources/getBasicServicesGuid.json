@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type" : "object",
+  "properties" : {
+    "guid": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "guidBE": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "name": {
+      "type": "string"
+    },
+    "estimate": {
+      "type": "string"
+    },
+    "OKVED": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "nomenclature": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "process": {
+      "type": "string"
+    },
+    "estimateNumber": {
+      "type": "string"
+    },
+    "re-exhibited": {
+      "type": "boolean"
+    },
+    "internal": {
+      "type": "boolean"
+    },
+    "codeUC": {
+      "type": "string"
+    }
+  },
+  "required": ["guid", "code", "guidBE", "name", "estimate", "nomenclature", "process", "estimateNumber", "OKVED", "re-exhibited", "internal", "codeUC"]
+}

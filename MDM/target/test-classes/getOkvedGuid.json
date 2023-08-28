@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type" : "object",
+  "properties" : {
+    "guid": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "code": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+            }
+    },
+  "required": ["guid","code", "name" ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type" : "object",
+    "properties" : {
+      "guid": {
+        "type": "string",
+        "minLength": 36,
+        "maxLength": 36
+      },
+      "code": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "unit": {
+        "type": "string",
+        "minLength": 36,
+        "maxLength": 36
+      },
+      "commodity": {
+        "type": "boolean"
+      },
+      "traceableItem": {
+        "type": "boolean"
+      }
+    },
+      "required": ["guid","code", "name", "unit","commodity", "traceableItem" ]
+    }
+

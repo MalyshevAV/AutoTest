@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type" : "object",
+  "properties" : {
+    "guid": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "code": {
+      "type": "string"
+    },
+    "parent": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "consolidatedGroup": {
+      "type": "boolean"
+    },
+    "OKP": {
+      "type": "string"
+    },
+    "TNVED": {
+      "type": "string"
+    },
+    "OKVED": {
+      "type": "string"
+    },
+    "OKPD2": {
+      "type": "string"
+    }
+  },
+  "required": ["guid", "code", "parent", "name", "owner", "consolidatedGroup", "OKP", "TNVED", "OKVED", "OKPD2" ]
+}
+
+
+
+
+
+
+
+
