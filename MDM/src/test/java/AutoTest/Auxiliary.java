@@ -24,4 +24,18 @@ public class Auxiliary {
                 .get("/set-new-hash")
                 .then().log().all().statusCode(200);
     }
+    @Test
+    @Description ("Проверка доступа и авторизации")
+    public void getPing(){
+        given()
+                .auth().basic("Administrator", "1234567809").when()
+                .get("/ping")
+                .then().log().all()
+                .assertThat()
+                .statusCode(200);
+    }
+
+
+
+
 }
