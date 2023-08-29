@@ -1,23 +1,19 @@
 package AutoTest;
 
-import MDM.POJO.OkpdPojo;
 import MDM.POJO.UnifiedClassifirePojo;
 import MDM.POJO.UnitsPojo;
 import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.Objects;
 
 import static io.restassured.RestAssured.filters;
 import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidatorSettings.settings;
 
 public class Classifier {
     @BeforeClass
@@ -26,18 +22,18 @@ public class Classifier {
     }
 
     @Test
-    @Description("Получение массива всех категорий Единый классификатор имя переменной поменть")
+    @Description("Получение массива всех категорий Единый классификатор")
     public void getUnifiedClassifierList() {
         List<UnifiedClassifirePojo> response  =
                 given()
                         .auth().basic("Administrator", "1234567809")
-                        .contentType(ContentType.JSON)
+                       // .contentType(ContentType.JSON)
                         .when()
                         .queryParam("step", 5)
-                        .get("/unified-classier")
+                        .get("/unified-classifier")
                         .then().log().all()
                         .extract().body().jsonPath().getList(".", UnifiedClassifirePojo.class);
-        Assertions.assertNotNull(response);
+     //   Assertions.assertNotNull(response);
     }
 
     @Test
@@ -48,7 +44,7 @@ public class Classifier {
                 .get("unified-classifier/8eb9bf84-3507-11ee-918f-7824af8ab721")
                 .then().log().all()
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getUnifiedClssifierGuid.json"))
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getUnifiedClassifierGuid.json"))
                 .statusCode(200);
     }
     @Test

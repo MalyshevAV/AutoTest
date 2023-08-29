@@ -22,20 +22,20 @@
     "consolidatedGroup": {
       "type": "boolean"
     },
-    "OKP": {
+    "okp": {
       "type": "string"
     },
-    "TNVED": {
+    "tnved": {
       "type": "string"
     },
-    "OKVED": {
+    "okved": {
       "type": "string"
     },
-    "OKPD2": {
+    "okpd2": {
       "type": "string"
     }
   },
-  "required": ["guid", "code", "parent", "name", "owner", "consolidatedGroup", "OKP", "TNVED", "OKVED", "OKPD2" ]
+  "required": ["guid", "code", "parent", "name", "owner", "consolidatedGroup", "okp", "tnved", "okved", "okpd2" ]
 }
 
 

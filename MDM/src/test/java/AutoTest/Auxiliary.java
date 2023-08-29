@@ -1,10 +1,16 @@
 package AutoTest;
 
+import MDM.POJO.PartnerPojo;
+import MDM.POJO.getBeListPojo;
 import io.qameta.allure.Description;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -23,6 +29,19 @@ public class Auxiliary {
                 .when()
                 .get("/set-new-hash")
                 .then().log().all().statusCode(200);
+    }
+    @Test
+    @Description("Получение списка бизнес единиц")
+    public void getBeList() {
+        List<getBeListPojo> response =
+                given()
+                        .auth().basic("Administrator", "1234567809")
+                        .contentType(ContentType.JSON).when()
+                        .get("/be")
+                        .then().log().all().statusCode(200).
+                        extract().body().jsonPath().getList(".", getBeListPojo.class);
+//        response.forEach(x -> Assert.assertFalse(x.getInn().isEmpty())); //(проверка, что нет пустых значений)
+//        response.forEach(x -> Assert.assertFalse(x.getNameFull().isEmpty()));
     }
     @Test
     @Description ("Проверка доступа и авторизации")

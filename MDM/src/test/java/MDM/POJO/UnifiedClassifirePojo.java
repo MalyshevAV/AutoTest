@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UnifiedClassifirePojo {
-    public String guid;
-    public String code;
-    public String parent;
-    public String name;
-    public String owner;
-    public boolean consolidatedGroup;
-    public String okp;
-    public String tnved;
-    public String okved;
-    public String okpd2;
+    private String guid;
+    private String code;
+    private String parent;
+    private String name;
+    private String owner;
+    private boolean consolidatedGroup;
+    private String okp;
+    private String tnved;
+    private String okved;
+    private String okpd2;
     @JsonCreator
     public UnifiedClassifirePojo(
             @JsonProperty(value = "guid", required = true) String guid,
