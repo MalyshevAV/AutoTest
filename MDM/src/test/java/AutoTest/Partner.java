@@ -12,18 +12,22 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 //import static org.hamcrest.MatcherAssert.assertThat;
+import java.net.URL;
 import java.util.List;
 
 import static groovy.xml.dom.DOMCategory.isEmpty;
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.junit.platform.commons.util.StringUtils.isBlank;
 
 public class Partner {
     @BeforeClass
     public void setup() {
+    //    Specifications.installSpec(Specifications.requestSpecification(baseURI), Specifications.responseSpecificationSpecification(baseURI));
         RestAssured.baseURI = "http://i1c.ddns.net:60380/TEST_KIT_MDM/hs/klass/";
         //  RestAssured.port = 443;
     }
+
     @Test
     @Description("Получение списка партнеров")
     public void getPartnerList(){
@@ -40,6 +44,7 @@ public class Partner {
         response.forEach(x-> Assert.assertFalse(x.getNameFull().isEmpty()));
       //  response.forEach(x-> Assert.assertTrue(x.getKpp().isEmpty()));
     }
+
     @Test
     @Description("Получение списка партнеров по Гуид")
     public void getPartnerGuid(){

@@ -117,10 +117,17 @@ public class ClassifireIsAllRussian {
                         .body("code", not(emptyOrNullString()))
                         .extract().response();
 
-        //JsonPath jsonPath = response.jsonPath();
-        //  response.forEach(x-> Assert.assertTrue(x.getCode().isEmpty()));
-       // response.forEach(x->Assert.assertTrue(x.getGuid().contains());
-       // response.forEach(x->Assert.assertTrue(x.getGuid().isBlank()));
+        JsonPath jsonPath = response.jsonPath();
+        List<String> guid = jsonPath.get("guid");
+        List<String> name = jsonPath.get("name");
+        List<String> code = jsonPath.get("code");
+
+        for(int i = 0; i<guid.size(); i++){
+            Assert.assertFalse(guid.get(i).isEmpty());
+            Assert.assertEquals(guid.get(i).length(),36);
+        }
+        Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150 ));
+        Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8 ));
     }
 }
 
