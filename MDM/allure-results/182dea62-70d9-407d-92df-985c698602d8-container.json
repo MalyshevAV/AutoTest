@@ -1,1 +1,0 @@
-{"uuid":"182dea62-70d9-407d-92df-985c698602d8","name":"AutoTest.Classifier","children":["7bcb9e44-02be-40e2-8c24-bfa109882acc"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1693293785726,"stop":1693293786091}],"afters":[],"links":[],"start":1693293785703,"stop":1693293788324}

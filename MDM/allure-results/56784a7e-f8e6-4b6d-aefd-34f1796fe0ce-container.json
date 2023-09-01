@@ -1,1 +1,0 @@
-{"uuid":"56784a7e-f8e6-4b6d-aefd-34f1796fe0ce","name":"AutoTest.Nomenclature","children":["78465ce8-f892-47bd-949e-ae3d8252c543"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1693398877248,"stop":1693398877603}],"afters":[],"links":[],"start":1693398877225,"stop":1693398879773}
