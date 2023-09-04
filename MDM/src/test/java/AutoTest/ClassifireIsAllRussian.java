@@ -108,7 +108,7 @@ public class ClassifireIsAllRussian {
                         .auth().basic("Administrator", "1234567809")
                         .contentType(ContentType.JSON)
                         .when()
-                        .queryParam("step", 5,100,200)
+                        .queryParam("step", 5)
                         .get("/okved2")
                         .then().log().all().statusCode(200)
                         .body("size()", is(5))
@@ -126,8 +126,8 @@ public class ClassifireIsAllRussian {
             Assert.assertFalse(guid.get(i).isEmpty());
             Assert.assertEquals(guid.get(i).length(),36);
         }
-        Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150 ));
-        Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8 ));
+        Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150));
+        Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8));
     }
 }
 

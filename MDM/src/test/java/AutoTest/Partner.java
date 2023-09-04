@@ -8,6 +8,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
+import org.junit.jupiter.api.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -33,18 +34,21 @@ public class Partner {
     public void getPartnerList() {
         List<PartnerPojo> response =
                 given()
-                        .queryParam("step", 5, 100, 200)
+                        .queryParam("step", 5)
                         .auth().basic("Administrator", "1234567809")
                         .contentType(ContentType.JSON).when()
                         .get("/partner")
                         .then().log().all().statusCode(200).
                         extract().body().jsonPath().getList(".", PartnerPojo.class);
         response.forEach(x -> Assert.assertFalse(x.getInn().isEmpty())); //(проверка, что нет пустых значений)
-        response.forEach(x -> Assert.assertFalse(x.getGuid().isEmpty()));
+        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x -> Assert.assertFalse(x.getName().isEmpty()));
-        response.forEach(x -> Assert.assertTrue(x.getNameFull().isEmpty()));
-        //response.forEach(Assert.assertTrue(x->x.getName().length() <= 150 );
-        //  response.forEach(x-> Assert.assertTrue(x.getKpp().isEmpty()));
+       // response.forEach(x -> Assert.assertTrue(x.getNameFull().isEmpty()));
+        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 100));
+        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 150));
+        response.forEach(x-> Assert.assertTrue(x.getInn().length() <= 12));
+        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 100));
+        response.forEach(x-> Assert.assertEquals(x.getKpp().length(), 9));
     }
 
 

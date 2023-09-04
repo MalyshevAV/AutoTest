@@ -1,0 +1,1 @@
+{"uuid":"a4477896-e57a-4a24-bbf8-c24e77b10e35","name":"AutoTest.Partner","children":["ddfbdd3c-f205-495c-98a5-c363affde6c8"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1693841029929,"stop":1693841030274}],"afters":[],"links":[],"start":1693841029908,"stop":1693841032948}
