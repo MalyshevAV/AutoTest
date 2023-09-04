@@ -81,17 +81,18 @@ public class Classifier {
                         .auth().basic("Administrator", "1234567809")
                         .contentType(ContentType.JSON)
                         .when()
-                        .queryParam("step", 5)
+                        .queryParam("step", 5,100,200)
                         .get("/units")
-                        .then().log().all()
-                        .extract().body().jsonPath().getList(".", UnitsPojo.class);
+                        .then().log().all().statusCode(200)
+                        .extract().body().jsonPath().getList(".", UnitsPojo.class).stream().toList();
         Assertions.assertNotNull(response);
     }
     @Test
     @Description ("Получение единиц измерения по Гуид")
     public void getUnitsGuid(){
         given()
-                .auth().basic("Administrator", "1234567809").when()
+                .auth().basic("Administrator", "1234567809")
+                .contentType(ContentType.JSON).when()
                 .get("units/85303f5a-e3aa-11e2-91f0-c80aa9301ced")
                 .then().log().all()
                 .assertThat()

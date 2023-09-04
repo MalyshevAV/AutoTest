@@ -30,20 +30,23 @@ public class Partner {
 
     @Test
     @Description("Получение списка партнеров")
-    public void getPartnerList(){
-       List<PartnerPojo> response =
-               given()
-                .auth().basic("Administrator", "1234567809")
-                       .contentType(ContentType.JSON).when()
-                .get("/partner")
-                .then().log().all().statusCode(200).
-                extract().body().jsonPath().getList(".", PartnerPojo.class);
-        response.forEach(x-> Assert.assertFalse(x.getInn().isEmpty())); //(проверка, что нет пустых значений)
-        response.forEach(x-> Assert.assertFalse(x.getGuid().isEmpty()));
-        response.forEach(x-> Assert.assertFalse(x.getName().isEmpty()));
-        response.forEach(x-> Assert.assertFalse(x.getNameFull().isEmpty()));
-      //  response.forEach(x-> Assert.assertTrue(x.getKpp().isEmpty()));
+    public void getPartnerList() {
+        List<PartnerPojo> response =
+                given()
+                        .queryParam("step", 5, 100, 200)
+                        .auth().basic("Administrator", "1234567809")
+                        .contentType(ContentType.JSON).when()
+                        .get("/partner")
+                        .then().log().all().statusCode(200).
+                        extract().body().jsonPath().getList(".", PartnerPojo.class);
+        response.forEach(x -> Assert.assertFalse(x.getInn().isEmpty())); //(проверка, что нет пустых значений)
+        response.forEach(x -> Assert.assertFalse(x.getGuid().isEmpty()));
+        response.forEach(x -> Assert.assertFalse(x.getName().isEmpty()));
+        response.forEach(x -> Assert.assertTrue(x.getNameFull().isEmpty()));
+        //response.forEach(Assert.assertTrue(x->x.getName().length() <= 150 );
+        //  response.forEach(x-> Assert.assertTrue(x.getKpp().isEmpty()));
     }
+
 
     @Test
     @Description("Получение списка партнеров по Гуид")

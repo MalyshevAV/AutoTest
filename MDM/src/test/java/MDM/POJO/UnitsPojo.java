@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UnitsPojo {
 
+
     private String guid;
+
     private String name;
     private String nameFull;
     private  String code;

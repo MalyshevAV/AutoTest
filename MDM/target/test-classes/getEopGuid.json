@@ -8,13 +8,19 @@
       "maxLength": 36
     },
     "code": {
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 14
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 100
     },
     "parent": {
-      "type": "string"
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
     }
     },
   "required": ["guid", "code", "name", "parent"]
