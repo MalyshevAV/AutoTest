@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 
 import static io.restassured.RestAssured.filters;

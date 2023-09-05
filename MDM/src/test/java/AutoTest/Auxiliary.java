@@ -6,6 +6,7 @@ import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import org.junit.jupiter.api.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -40,8 +41,13 @@ public class Auxiliary {
                         .get("/be")
                         .then().log().all().statusCode(200).
                         extract().body().jsonPath().getList(".", getBeListPojo.class);
-//        response.forEach(x -> Assert.assertFalse(x.getInn().isEmpty())); //(проверка, что нет пустых значений)
-//        response.forEach(x -> Assert.assertFalse(x.getNameFull().isEmpty()));
+        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
+        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 150));
+        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 255));
+        response.forEach(x-> Assert.assertTrue(x.getInn().length() <= 12));
+        response.forEach(x-> Assert.assertEquals(x.getKpp().length(), 9));
+        Assertions.assertNotNull(response);
+
     }
     @Test
     @Description ("Проверка доступа и авторизации")

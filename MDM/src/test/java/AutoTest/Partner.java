@@ -1,6 +1,7 @@
 package AutoTest;
 
 import MDM.POJO.PartnerPojo;
+import Specifications.Specifications;
 import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 
@@ -16,30 +17,27 @@ import org.testng.annotations.Test;
 import java.net.URL;
 import java.util.List;
 
+import static Specifications.Specifications.requestSpecification;
+import static Specifications.Specifications.responseSpecification;
 import static groovy.xml.dom.DOMCategory.isEmpty;
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.junit.platform.commons.util.StringUtils.isBlank;
 
 public class Partner {
-    @BeforeClass
-    public void setup() {
-    //    Specifications.installSpec(Specifications.requestSpecification(baseURI), Specifications.responseSpecificationSpecification(baseURI));
-        RestAssured.baseURI = "http://i1c.ddns.net:60380/TEST_KIT_MDM/hs/klass/";
-        //  RestAssured.port = 443;
-    }
-
+//    @BeforeClass
     @Test
     @Description("Получение списка партнеров")
     public void getPartnerList() {
         List<PartnerPojo> response =
                 given()
+                        .spec(requestSpecification())
                         .queryParam("step", 5)
-                        .auth().basic("Administrator", "1234567809")
-                        .contentType(ContentType.JSON).when()
+                        .when()
                         .get("/partner")
-                        .then().log().all().statusCode(200).
-                        extract().body().jsonPath().getList(".", PartnerPojo.class);
+                        .then()
+                        .log().all()
+                        .spec(responseSpecification())
+                        .extract().body().jsonPath().getList(".", PartnerPojo.class);
         response.forEach(x -> Assert.assertFalse(x.getInn().isEmpty())); //(проверка, что нет пустых значений)
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x -> Assert.assertFalse(x.getName().isEmpty()));
@@ -56,15 +54,14 @@ public class Partner {
     @Description("Получение списка партнеров по Гуид")
     public void getPartnerGuid(){
         given()
-                .auth().basic("Administrator", "1234567809")
-                .contentType(ContentType.JSON)
+                .spec(requestSpecification())
                 .when()
                 .get("/partner/876f5083-3d9b-11ee-918f-7824af8ab721")
-                .then().log().all()
+                .then()
+                .log().all()
+                .spec(responseSpecification())
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getPartnerGuid.json"))
-                .statusCode(200);
-
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getPartnerGuid.json"));
     }
 
 }
