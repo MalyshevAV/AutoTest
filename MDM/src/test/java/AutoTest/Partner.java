@@ -56,7 +56,9 @@ public class Partner {
     @Description("Получение списка партнеров по Гуид")
     public void getPartnerGuid(){
         given()
-                .auth().basic("Administrator", "1234567809").when()
+                .auth().basic("Administrator", "1234567809")
+                .contentType(ContentType.JSON)
+                .when()
                 .get("/partner/876f5083-3d9b-11ee-918f-7824af8ab721")
                 .then().log().all()
                 .assertThat()

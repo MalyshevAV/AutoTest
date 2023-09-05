@@ -43,6 +43,9 @@ public class ClassifireIsAllRussian {
                         .get("/okpd2")
                         .then().log().all()
                         .extract().body().jsonPath().getList(".", OkpdPojo.class);
+        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
+        response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 12));
+        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
         Assertions.assertNotNull(response);
     }
     @Test
@@ -84,6 +87,10 @@ public class ClassifireIsAllRussian {
                 .get("/tnved")
                 .then().log().all()
                         .extract().body().jsonPath().getList(".", TnvdPojo.class);
+        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
+        response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 10));
+        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
+        response.forEach(x -> Assert.assertEquals(x.getUnit().length(), 36));
         Assertions.assertNotNull(response);
     }
 
@@ -122,9 +129,9 @@ public class ClassifireIsAllRussian {
         List<String> name = jsonPath.get("name");
         List<String> code = jsonPath.get("code");
 
-        for(int i = 0; i<guid.size(); i++){
-            Assert.assertFalse(guid.get(i).isEmpty());
-            Assert.assertEquals(guid.get(i).length(),36);
+        for (String s : guid) {
+            Assert.assertFalse(s.isEmpty());
+            Assert.assertEquals(s.length(), 36);
         }
         Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150));
         Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8));

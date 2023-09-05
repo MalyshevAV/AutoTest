@@ -6,10 +6,13 @@ import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import org.assertj.core.error.ShouldNotBeNull;
 import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static io.restassured.RestAssured.filters;
@@ -33,7 +36,16 @@ public class Classifier {
                         .get("/unified-classifier")
                         .then().log().all()
                         .extract().body().jsonPath().getList(".", UnifiedClassifirePojo.class);
-     //   Assertions.assertNotNull(response);
+        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
+        response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 14));
+        response.forEach(x -> Assert.assertEquals(x.getParent().length(), 36));
+        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 100));
+        response.forEach(x -> Assert.assertEquals(x.getOwner().length(), 36));
+        response.forEach(x-> Assert.assertTrue(x.getOkp().length() <= 25));
+        response.forEach(x-> Assert.assertTrue(x.getTnved().length() <= 10));
+        response.forEach(x-> Assert.assertTrue(x.getOkved().length() <= 7));
+        response.forEach(x-> Assert.assertTrue(x.getOkpd2().length() <= 12));
+        Assertions.assertNotNull(response);
     }
 
     @Test
@@ -87,6 +99,11 @@ public class Classifier {
                         .get("/units")
                         .then().log().all().statusCode(200)
                         .extract().body().jsonPath().getList(".", UnitsPojo.class).stream().toList();
+        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
+        response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 4)); // уточнить
+        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 25));
+        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 100));
+        response.forEach(x-> Assert.assertTrue(x.getInternationalReduction().length() <= 3));
         Assertions.assertNotNull(response);
     }
     @Test
