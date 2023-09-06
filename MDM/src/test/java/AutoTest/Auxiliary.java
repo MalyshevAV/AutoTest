@@ -13,33 +13,29 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static Specifications.Specifications.*;
 import static io.restassured.RestAssured.given;
 
 public class Auxiliary {
-    @BeforeClass
-    public void setup() {
-        RestAssured.baseURI = "http://i1c.ddns.net:60380/TEST_KIT_MDM/hs/klass/";
-    }
-
     @Test
     @Description("Получение ОКПД2 по Гуид, валидация при помощи схемы Json")
     public void getSetNewHash() {
+        installSpec(requestSpecification(), responseSpecification());
         given()
-                .auth().basic("Administrator", "1234567809")
                 .header("x-se-hash",  "cfcd208495d565ef66e7dff9f98764da")
                 .when()
                 .get("/set-new-hash")
-                .then().log().all().statusCode(200);
+                .then().log().all();
+        deleteSpec();
     }
     @Test
     @Description("Получение списка бизнес единиц")
     public void getBeList() {
+        installSpec(requestSpecification(), responseSpecification());
         List<getBeListPojo> response =
                 given()
-                        .auth().basic("Administrator", "1234567809")
-                        .contentType(ContentType.JSON).when()
                         .get("/be")
-                        .then().log().all().statusCode(200).
+                        .then().log().all().
                         extract().body().jsonPath().getList(".", getBeListPojo.class);
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 150));
@@ -47,20 +43,17 @@ public class Auxiliary {
         response.forEach(x-> Assert.assertTrue(x.getInn().length() <= 12));
         response.forEach(x-> Assert.assertEquals(x.getKpp().length(), 9));
         Assertions.assertNotNull(response);
-
+        deleteSpec();
     }
+    
     @Test
     @Description ("Проверка доступа и авторизации")
     public void getPing(){
+        installSpec(requestSpecification(), responseSpecification());
         given()
-                .auth().basic("Administrator", "1234567809").when()
+                .when()
                 .get("/ping")
-                .then().log().all()
-                .assertThat()
-                .statusCode(200);
+                .then().log().all();
+        deleteSpec();
     }
-
-
-
-
 }

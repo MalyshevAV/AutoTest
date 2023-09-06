@@ -17,8 +17,7 @@ import org.testng.annotations.Test;
 import java.net.URL;
 import java.util.List;
 
-import static Specifications.Specifications.requestSpecification;
-import static Specifications.Specifications.responseSpecification;
+import static Specifications.Specifications.*;
 import static groovy.xml.dom.DOMCategory.isEmpty;
 import static io.restassured.RestAssured.*;
 import static org.junit.platform.commons.util.StringUtils.isBlank;
@@ -28,40 +27,41 @@ public class Partner {
     @Test
     @Description("Получение списка партнеров")
     public void getPartnerList() {
+     installSpec(requestSpecification(), responseSpecification());
+
         List<PartnerPojo> response =
                 given()
-                        .spec(requestSpecification())
                         .queryParam("step", 5)
                         .when()
                         .get("/partner")
                         .then()
                         .log().all()
-                        .spec(responseSpecification())
                         .extract().body().jsonPath().getList(".", PartnerPojo.class);
         response.forEach(x -> Assert.assertFalse(x.getInn().isEmpty())); //(проверка, что нет пустых значений)
-        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x -> Assert.assertFalse(x.getName().isEmpty()));
-       // response.forEach(x -> Assert.assertTrue(x.getNameFull().isEmpty()));
+        response.forEach(x -> Assert.assertTrue(x.getNameFull().isEmpty()));
+
+        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 100));
         response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 150));
         response.forEach(x-> Assert.assertTrue(x.getInn().length() <= 12));
-        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 100));
         response.forEach(x-> Assert.assertEquals(x.getKpp().length(), 9));
+        deleteSpec();
     }
 
 
     @Test
     @Description("Получение списка партнеров по Гуид")
     public void getPartnerGuid(){
+        installSpec(requestSpecification(), responseSpecification());
         given()
-                .spec(requestSpecification())
                 .when()
                 .get("/partner/876f5083-3d9b-11ee-918f-7824af8ab721")
                 .then()
                 .log().all()
-                .spec(responseSpecification())
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getPartnerGuid.json"));
+        deleteSpec();
     }
 
 }

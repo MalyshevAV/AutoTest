@@ -26,9 +26,11 @@ public class Specifications {
                 .expectStatusCode(200)
                 .build();
     }
-//    public static void installSpec(RequestSpecification request, ResponseSpecification response){
-//        RestAssured.requestSpecification = request;
-//        RestAssured.responseSpecification = response;
-//    }
+    public static void installSpec(RequestSpecification request, ResponseSpecification response){
+        RestAssured.requestSpecification = request;
+        RestAssured.responseSpecification = response;
+    }
+    public static void deleteSpec(){
 
+    }
 }

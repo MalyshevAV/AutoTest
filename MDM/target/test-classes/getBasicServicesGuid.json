@@ -13,16 +13,22 @@
       "maxLength": 36
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 150
     },
     "estimate": {
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 150
     },
     "OKVED": {
       "type": "string"
     },
     "code": {
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 9
     },
     "nomenclature": {
       "type": "string",
@@ -30,10 +36,14 @@
       "maxLength": 36
     },
     "process": {
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 150
     },
     "estimateNumber": {
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 15
     },
     "re-exhibited": {
       "type": "boolean"
@@ -42,7 +52,9 @@
       "type": "boolean"
     },
     "codeUC": {
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 15
     }
   },
   "required": ["guid", "code", "guidBE", "name", "estimate", "nomenclature", "process", "estimateNumber", "OKVED", "re-exhibited", "internal", "codeUC"]

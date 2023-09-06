@@ -3,6 +3,7 @@ package AutoTest;
 
 import MDM.POJO.OkpdPojo;
 import MDM.POJO.TnvdPojo;
+import Specifications.Specifications;
 import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -16,6 +17,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static Specifications.Specifications.*;
 import static io.restassured.RestAssured.given;
 
 import static io.restassured.RestAssured.responseSpecification;
@@ -26,18 +28,12 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class ClassifireIsAllRussian {
-    @BeforeClass
-    public void setup() {
-        RestAssured.baseURI = "http://i1c.ddns.net:60380/TEST_KIT_MDM/hs/klass/";
-        //  RestAssured.port = 443;
-    }
     @Test
     @Description("Получение списка Okpd2 ")
     public void getOkpdList() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         List<OkpdPojo> response  =
                 given()
-                        .auth().basic("Administrator", "1234567809")
-                        .contentType(ContentType.JSON)
                         .when()
                         .queryParam("step", 5)
                         .get("/okpd2")
@@ -47,41 +43,41 @@ public class ClassifireIsAllRussian {
         response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 12));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
         Assertions.assertNotNull(response);
+        deleteSpec();
     }
     @Test
     @Description("Получение ОКПД2 по Гуид, валидация при помощи схемы Json")
     public void getOkpdGuid() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
        given()
-                .auth().basic("Administrator", "1234567809")
                 .when()
                 .get("/okpd2/15841c5e-1973-11ee-b5ac-005056013b0c")
                 .then().log().all()
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedGuid.json"))
-                // поля в ответе Оквед и ОКПД одинаковые
-                .statusCode(200);
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedGuid.json"));
+                // поля в ответе Оквед и ОКПД одинаковые;
+        deleteSpec();
     }
 
     @Test
     @Description("Получение ТНВД по Гуид, валидация при помощи схемы Json")
     public void getTnvdGuid() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
-                .auth().basic("Administrator", "1234567809")
                 .when()
                 .get("/tnved/f8299582-32a7-11ee-918f-7824af8ab721")
                 .then().log().all()
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getTvendGuid.json"))
-                .statusCode(200);
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getTvendGuid.json"));
+        deleteSpec();
     }
 
     @Test
     @Description("Получение списка ТНВД ")
     public void getTnvdList() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         List<TnvdPojo> response  =
                 given()
-                .auth().basic("Administrator", "1234567809")
-                        .contentType(ContentType.JSON)
                 .when()
                 .queryParam("step", 5)
                 .get("/tnved")
@@ -92,32 +88,32 @@ public class ClassifireIsAllRussian {
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
         response.forEach(x -> Assert.assertEquals(x.getUnit().length(), 36));
         Assertions.assertNotNull(response);
+        deleteSpec();
     }
 
     @Test
     @Description("Получение Okved по Гуид, валидация при помощи схемы Json")
     public void getOkvedGuid() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
-                .auth().basic("Administrator", "1234567809")
                 .when()
                 .queryParam("step", 5,100,200)
                 .get("/okved2/377593d9-168f-11ee-b5ab-a0dc07f9a67b")
                 .then().log().all()
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedGuid.json"))
-                .statusCode(200);
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedGuid.json"));
+        deleteSpec();
     }
     @Test
     @Description("Получение списка OKVED ")
     public void getOkvedList() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         Response response  =
                 given()
-                        .auth().basic("Administrator", "1234567809")
-                        .contentType(ContentType.JSON)
                         .when()
                         .queryParam("step", 5)
                         .get("/okved2")
-                        .then().log().all().statusCode(200)
+                        .then().log().all()
                         .body("size()", is(5))
                         .body("guid", notNullValue())
                         .body("name", notNullValue())
@@ -135,6 +131,7 @@ public class ClassifireIsAllRussian {
         }
         Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150));
         Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8));
+        deleteSpec();
     }
 }
 
