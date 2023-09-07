@@ -45,10 +45,24 @@ public class Partner {
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 100));
         response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 150));
         response.forEach(x-> Assert.assertTrue(x.getInn().length() <= 12));
+        // Временно меньше 9, поле пустое
+       // response.forEach(x-> Assert.assertTrue(x.getKpp().length() <= 9));
         response.forEach(x-> Assert.assertEquals(x.getKpp().length(), 9));
         deleteSpec();
     }
-
+    @Test
+    @Description("Негативный тест Получение списка партнеров")
+    public void getPartnerListExpected400() {
+        List<PartnerPojo> response =
+                given().spec(requestSpecification())
+                        .queryParam("step", "<script>alert( 'Hello world' );</script>")
+                        .when()
+                        .get("/partner")
+                        .then()
+                        .spec(responseSpecification400())
+                        .log().all()
+                        .extract().body().jsonPath().getList(".", PartnerPojo.class);
+    }
 
     @Test
     @Description("Получение списка партнеров по Гуид")
@@ -63,6 +77,22 @@ public class Partner {
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getPartnerGuid.json"));
         deleteSpec();
     }
+
+    @Test
+    @Description("Негативный тест, получение списка партнеров по Гуид")
+    public void getPartnerGuidExpected400(){
+        given()
+                .when()
+                .spec(requestSpecification())
+                .get("/partner/876f5083-3d9b-11ee-918f-7824af8ab721")
+                .then()
+                .spec(responseSpecification400())
+                .log().all()
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getPartnerGuid.json"));
+
+    }
+
 
 }
 

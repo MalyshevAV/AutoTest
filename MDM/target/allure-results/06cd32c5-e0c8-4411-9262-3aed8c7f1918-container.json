@@ -1,1 +1,0 @@
-{"uuid":"06cd32c5-e0c8-4411-9262-3aed8c7f1918","name":"AutoTest.ClassifireIsAllRussian","children":["c234d121-a2da-4aff-bb30-bb032f834e7d"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1693924039848,"stop":1693924040239}],"afters":[],"links":[],"start":1693924039823,"stop":1693924042573}

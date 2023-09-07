@@ -1,1 +1,0 @@
-{"uuid":"72a85cb5-720c-4bcf-bce9-dde0a296ef8a","name":"AutoTest.Auxiliary","children":["baac1c4c-bb42-42a9-8ccc-69f7e8b26d08"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1693912825915,"stop":1693912826299}],"afters":[],"links":[],"start":1693912825891,"stop":1693912828524}

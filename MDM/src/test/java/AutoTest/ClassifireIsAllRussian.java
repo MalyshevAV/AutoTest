@@ -111,7 +111,7 @@ public class ClassifireIsAllRussian {
         Response response  =
                 given()
                         .when()
-                        .queryParam("step", 5)
+                        .queryParam("step", 200)
                         .get("/okved2")
                         .then().log().all()
                         .body("size()", is(5))

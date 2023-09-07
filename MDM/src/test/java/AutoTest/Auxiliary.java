@@ -45,7 +45,7 @@ public class Auxiliary {
         Assertions.assertNotNull(response);
         deleteSpec();
     }
-    
+
     @Test
     @Description ("Проверка доступа и авторизации")
     public void getPing(){
