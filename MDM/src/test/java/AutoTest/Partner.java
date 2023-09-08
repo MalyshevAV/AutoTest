@@ -1,29 +1,21 @@
 package AutoTest;
 
 import MDM.POJO.PartnerPojo;
-import Specifications.Specifications;
 import io.qameta.allure.Description;
-import io.restassured.RestAssured;
 
 
-import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
-import org.junit.jupiter.api.Assertions;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 //import static org.hamcrest.MatcherAssert.assertThat;
-import java.net.URL;
 import java.util.List;
 
 import static Specifications.Specifications.*;
-import static groovy.xml.dom.DOMCategory.isEmpty;
 import static io.restassured.RestAssured.*;
-import static org.junit.platform.commons.util.StringUtils.isBlank;
+import static org.hamcrest.Matchers.is;
 
-public class Partner {
-//    @BeforeClass
+public class Partner  {
     @Test
     @Description("Получение списка партнеров")
     public void getPartnerList() {
@@ -50,6 +42,7 @@ public class Partner {
         response.forEach(x-> Assert.assertEquals(x.getKpp().length(), 9));
         deleteSpec();
     }
+
     @Test
     @Description("Негативный тест Получение списка партнеров")
     public void getPartnerListExpected400() {
