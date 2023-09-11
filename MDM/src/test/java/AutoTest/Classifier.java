@@ -387,7 +387,7 @@ public class Classifier {
     @Test
     @Description("Негативный тест Получение единого классификатора по Гуид,Инъекция")
     public void getUnifiedClassifierGuidInjection() {
-        installSpec(requestSpecification(), responseSpecification400());
+        installSpec(requestSpecification(), responseSpecification404());
         given()
                 .when()
                 .get("unified-classifier/<script>alert( 'Hello world' );</script>")
@@ -761,7 +761,7 @@ public class Classifier {
     @Test
     @Description("Негативный тест Получение единого оганичительного перечня по Гуид,Инъекция")
     public void getEopGuidInjection() {
-        installSpec(requestSpecification(), responseSpecification400());
+        installSpec(requestSpecification(), responseSpecification404());
         given()
                 .when()
                 .get("eop/<script>alert( 'Hello world' );</script>")
@@ -1142,7 +1142,7 @@ public class Classifier {
     @Test
     @Description("Негативный тест Получение единиц измерения по Гуид,Инъекция")
     public void getUnitsGuidInjection() {
-        installSpec(requestSpecification(), responseSpecification400());
+        installSpec(requestSpecification(), responseSpecification404());
         given()
                 .when()
                 .get("units/<script>alert( 'Hello world' );</script>")

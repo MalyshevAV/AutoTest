@@ -387,7 +387,7 @@ public class ClassifireIsAllRussian {
     @Test
     @Description("Негативный тест Получение ОКПД2 по Гуид,Инъекция")
     public void getOkpdGuidInjection() {
-        installSpec(requestSpecification(), responseSpecification400());
+        installSpec(requestSpecification(), responseSpecification404());
         given()
                 .when()
                 .get("okpd2/<script>alert( 'Hello world' );</script>")
@@ -775,7 +775,7 @@ public class ClassifireIsAllRussian {
     @Test
     @Description("Негативный тест Получение Okved по Гуид,Инъекция")
     public void getOkvedGuidInjection() {
-        installSpec(requestSpecification(), responseSpecification400());
+        installSpec(requestSpecification(), responseSpecification404());
         given()
                 .when()
                 .get("okved2/<script>alert( 'Hello world' );</script>")
@@ -794,39 +794,266 @@ public class ClassifireIsAllRussian {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//////////////////////////////////Получение списка ТНВЕД ///////////////////////////////////////////
 
 
     @Test
-    @Description("Получение ТНВД по Гуид, валидация при помощи схемы Json")
-    public void getTnvdGuid() {
+    @Description("Получение списка ТНВEД")
+    public void getTnvedList() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        List<TnvdPojo> response  =
+                given()
+                .when()
+                .queryParam("step", 200)
+                .get("/tnved")
+                .then().log().all()
+                        .extract().body().jsonPath().getList(".", TnvdPojo.class);
+        Assertions.assertEquals(response.size(), 200);
+        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
+        response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 10));
+        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
+        response.forEach(x -> Assert.assertEquals(x.getUnit().length(), 36));
+        Assertions.assertNotNull(response);
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Получение списка ТНВEД из 5 объектов")
+    public void getTnvedListStepEqual5() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .get("tnved")
+                .then().log().all()
+                .body("size()", is(5));
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Получение массива ТНВEД из 6 объектов")
+    public void getTnvedListStepEqual6() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 6)
+                .get("tnved")
+                .then().log().all()
+                .body("size()", is(6));
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Получение массива ТНВEД из 199 объектов")
+    public void getTnvedListStepEqual199() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 199)
+                .get("tnved")
+                .then().log().all()
+                .body("size()", is(199));
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Получение массива ТНВEД из 100 объектов")
+    public void getTnvedListStepEqual100() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 100)
+                .get("tnved")
+                .then().log().all()
+                .body("size()", is(100));
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Получение массива ТНВEД, поле Step пустое")
+    public void getTnvedListStepIsEmpty() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .get("tnved")
+                .then().log().all()
+                .body("size()", is(lessThanOrEqualTo(200)));
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step (Min-1)")
+    public void getTnvedListStepMinMinus() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 4)
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step (Max+1)")
+    public void getTnvedListStepMaxPlus() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 201)
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step Max Integer")
+    public void getTnvedListStepMaxInteger() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 2147483647)
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step 3 пробела")
+    public void getTnvedListStepSpaces() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", "   ")
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step пробел перед числом и после")
+    public void getTnvedListStepTwoSpacesAndDigit() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", " 200 ")
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step Дробное число")
+    public void getTnvedListStepDoubleType() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 2.1)
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step пробел в середине числа")
+    public void getTnvedListStepDigitAndSpace() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", "2 1")
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step 1024 символа")
+    public void getTnvedListStep1024() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupta")
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step равен 0")
+    public void getTnvedListStepZero() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 0)
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step строка цифры+латинница")
+    public void getTnvedListStepDigitLatin() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", "123DWQ")
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step строка Спецсимволы")
+    public void getTnvedListStepSpecialSymbol() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", "!@#$%^&*(){}[]\"':;/<>\\|№\n")
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step строка select")
+    public void getTnvedListStepSelect() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", "select*From users")
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step отрицательное число")
+    public void getTnvedListStepNegativeNumber() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", -100)
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Негативный тест Получение массива ТНВEД, поле Step Инъекция")
+    public void getTnvedListStepInjection() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", "<script>alert( 'Hello world' );</script>")
+                .get("tnved")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    /////////////////////////////////Получение ТНВЕД по Гуид/////////////////////////////////////////
+
+    @Test
+    @Description("Получение ТНВЕД по Гуид, валидация при помощи схемы Json")
+    public void getTnvedGuid() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
@@ -838,22 +1065,117 @@ public class ClassifireIsAllRussian {
     }
 
     @Test
-    @Description("Получение списка ТНВД ")
-    public void getTnvdList() {
-        installSpec(requestSpecification(), Specifications.responseSpecification());
-        List<TnvdPojo> response  =
-                given()
+    @Description("Негативный тест Получение ТНВЕД по Гуид, несуществующий Гуид 36 символов")
+    public void getTnvedGuidNotExist() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
                 .when()
-                .queryParam("step", 5)
-                .get("/tnved")
-                .then().log().all()
-                        .extract().body().jsonPath().getList(".", TnvdPojo.class);
-        response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
-        response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 10));
-        response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
-        response.forEach(x -> Assert.assertEquals(x.getUnit().length(), 36));
-        Assertions.assertNotNull(response);
-        deleteSpec();
+                .get("tnved/09bdd436-3da3-11ee-918f-7824af8ab720")
+                .then().log().all();
     }
+
+    @Test
+    @Description("Негативный тест (Max+1) Получение ТНВЕД по Гуид")
+    public void getTnvedGuidMaxPlus() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/f8299582-32a7-11ee-918f-7824af8ab7211")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест (Max-1) Получение ТНВЕД по Гуид")
+    public void getTnvedGuidMaxMinus() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/f8299582-32a7-11ee-918f-7824af8ab72")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест Получение ТНВЕД по Гуид, только пробелы")
+    public void getTnvedGuidSpacies() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/      ")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест Получение ТНВЕД по Гуид, пробелы в начале и в конце")
+    public void getTnvedGuidTwoSpacies() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/ f8299582-32a7-11ee-918f-7824af8ab721 ")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест Получение ТНВЕД по Гуид, пробелы в середине строки")
+    public void getTnvedSpaciesIn() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/f8299582-32a7-11ee-9  18f-7824af8ab721")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест Получение ТНВЕД по Гуид, комбинация латинница, спецсимволы, кириллица числа")
+    public void getTnvedGuidCombination() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/f829??82-32a7-11ee-9ййf-7824af8ab721")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест Получение ТНВЕД по Гуид, Select")
+    public void getTnvedGuidSelect() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/select*from users")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест Получение ТНВЕД по Гуид, отрицательное число")
+    public void getTnvedGuidNegativeNumber() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/-1")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест Получение ТНВЕД по Гуид,Инъекция")
+    public void getTnvedGuidInjection() {
+        installSpec(requestSpecification(), responseSpecification404());
+        given()
+                .when()
+                .get("tnved/<script>alert( 'Hello world' );</script>")
+                .then().log().all();
+    }
+
+    @Test
+    @Description("Негативный тест Получение ТНВЕД по Гуид, 1024 буквы")
+    public void getTnvedGuid1024letters() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("tnved/gxswhxtknhsdoploxxjapfjmpkpczxmdlfjdkgrthqzzvlqikubahotafuuhdijsgupmqqtaayjhqnvutpsrbnqcgypgavjchnwryowuryjoavwmedyzemvfcwgxaddhpzmenrhryfotslitzzvpnwpbqhevugimknufhmqokkojtrnebnppbcvdfqzfpfaznrpdiqcjlmcshvhaygannurnuwqarnuqesaghlzhsbzzjtnnmnppsxhfjgxbgyskjifyvprwzlbdstrzpwczkkijscuumeutjxkghhujpycvizixjvuimgllrlxrcffxkaywnxuedexowpaovdhzxjomnmicqlmqsfyzdmicuvbsviwxmgqggiabffsczvqblvdjvfclpelnwmvaiuzfgrkhvbrxezehgnqtnnylvoixmydujlhiqttgwqmuoapxewvzwlmhfufzewpiqalfwddblvisdebxuqvitcbrmdesaneekmeoldibydhgpwmdgyhkggndvnqdngtqyacqffhkqsmmumjqxfghockypfyfvdslkmaeegakuakdwucpridzjnqsluqhezjorgoonzfvhvmulysknczvtewsadocupjbxkyeqyqekamtsvcsaitjuthpsbllxhemshnxsocunelzfglqqbvzobuouaictkwezixyoghfujiiykhtdjyxatgeihskjcweynknedplkbddtudmnrvhfvozalpgjlhmkdfnxzuwowtmbsxcsqnxbpiegkufpixpcnyeeekfubvspwaietagusqngnfbjozfmillxruvplvtvxnawkxppmmesqawzcezinmllmomgbpgompvkyyxjvuyolrskxrhgzjqkuaaxdonslbsgukrpbtbpmtcswaqsvdrwxlqhxccnwwegsuntuzxxzhbvleoogqlzbnmmuqenbfkhzcpkevmcxxwptgapageocdtsmfvnbtzljlywxydkpzjojfyjyihfinmwjengjor\n")
+                .then().log().all();
+    }
+
+
+
+
 }
 
