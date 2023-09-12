@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "guid": {
+        "type": "string",
+        "minLength": 36,
+        "maxLength": 36
+      },
+      "codeUC": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 50
+      },
+      "name": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 150
+      },
+      "fullName": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 255
+      },
+      "drawingDenotation": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 155
+      },
+      "ownershipSign": {
+        "type": "integer",
+        "enum": [0, 1]
+      },
+      "seriality": {
+        "type": "string",
+        "enum": [
+          "Серийная",
+          "Новая",
+          "Разовая",
+          "Прочая"
+        ]
+      },
+      "baseUnit": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 4
+      },
+      "height": {
+        "type": ["number", "null"],
+        "minLength": 0,
+        "maxLength": 10
+      },
+      "width": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "minLength": 0,
+        "maxLength": 10
+      },
+      "length": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "minLength": 0,
+        "maxLength": 10
+      },
+      "dimensionsUnit": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "minLength": 0,
+        "maxLength": 4
+      },
+      "weight": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "minLength": 0,
+        "maxLength": 10
+      },
+      "weightUnit": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "minLength": 0,
+        "maxLength": 4
+      }
+    },
+    "required": [
+      "guid",
+      "codeUC",
+      "name",
+      "fullName",
+      "drawingDenotation",
+      "ownershipSign",
+      "seriality",
+      "baseUnit",
+      "height",
+      "width",
+      "length",
+      "dimensionsUnit",
+      "weight",
+      "weightUnit"
+    ]
+  }
+}

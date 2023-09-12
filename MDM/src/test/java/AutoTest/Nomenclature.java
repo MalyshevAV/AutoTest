@@ -1,5 +1,6 @@
 package AutoTest;
 
+import Specifications.Specifications;
 import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -10,6 +11,7 @@ import java.io.File;
 
 import static Specifications.Specifications.*;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 
 public class Nomenclature {
 
@@ -74,5 +76,21 @@ public class Nomenclature {
                 .assertThat()
                 // .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"))
                 .statusCode(200);
+    }
+
+    @Test
+    @Description("Поиск номенклатуры, валидация Json схема")
+    public void getNomenclatureSearch() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 200)
+                .queryParam("type", 1)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(200))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
     }
 }

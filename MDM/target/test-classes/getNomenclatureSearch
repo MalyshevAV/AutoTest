@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type" : "object",
+  "properties" : {
+    "guid": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "codeUC": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 50
+    },
+    "name": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 150
+    },
+    "fullName": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "drawingDenotation": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 155
+    }
+     "drawingDenotation": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 155
+
+        }
+  },
+  "required": ["guid","name", "nameFull", "code", "internationalReduction" ]
+}
