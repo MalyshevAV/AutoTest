@@ -11,7 +11,7 @@ import java.io.File;
 
 import static Specifications.Specifications.*;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 public class Nomenclature {
 
@@ -84,13 +84,367 @@ public class Nomenclature {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .queryParam("step", 200)
+                .queryParam("step", 176)
+                .queryParam("type", 0)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(176))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, type = 1")
+    public void getNomenclatureSearchType1() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", "")
                 .queryParam("type", 1)
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(200))
+               .body("size()", is(176))
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, type = 2")
+    public void getNomenclatureSearchType2() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 100)
+                .queryParam("type", 2)
+                .queryParam("data", "01сб")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(100))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, type = 4")
+    public void getNomenclatureSearchType4() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 6)
+                .queryParam("type", 4)
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(6))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, type = 5")
+    public void getNomenclatureSearchType5() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 100)
+                .queryParam("type", 5)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(100))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+
+
+
+
+    ////////////////////////Поиск номенклатуры, негативные тесты////////////////////////////////
+    @Test
+    @Description("Поиск номенклатуры, поле data пустое")
+    public void getNomenclatureSearchDataIsEmpty() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 100)
+                .queryParam("type", 5)
+                .queryParam("data", "")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Typ = -1")
+    public void getNomenclatureSearchType() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", -1)
+                .queryParam("data", "1")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Type= - 0.1")
+    public void getNomenclatureSearchTypeNegativeDouble() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", -0.1)
+                .queryParam("data", "1")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Type = 5.1")
+    public void getNomenclatureSearchTypePositiveDouble() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 5.1)
+                .queryParam("data", "1")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Type = 6")
+    public void getNomenclatureSearchTypePositiveMaxPlus1() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 6)
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Type = Инъекция")
+    public void getNomenclatureSearchTypeInjection() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", "\"select*from users\"")
+
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Type = 2147483647")
+    public void getNomenclatureSearchTypeMaxInteger() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 2147483647)
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Type = Пробелы")
+    public void getNomenclatureSearchSpacies() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", " 9 ")
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Type = Спецсимволы")
+    public void getNomenclatureSearchSpecialSymbols() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", "!@#$%^&*(){}[]\"':;/<>\\|№\n")
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, поле Type = латиница+кириллица+числа+спецсиволы")
+    public void getNomenclatureSearchSpecialSymbolвs() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", "sыgf123&* ")
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Поиск номенклатуры, step = 4, type = 0")
+    public void getNomenclatureSearchTypeMinMinus() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 4)
+                .queryParam("type", 0)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all();
+               // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Поиск номенклатуры, step = 4, type = 1")
+    public void getNomenclatureSearchTypeIsEmpty() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 4)
+                .queryParam("type", 1)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, step = 4, type = 2")
+    public void getNomenclatureSearchType2Step4() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 4)
+                .queryParam("type", 2)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, step = 4, type = 3")
+    public void getNomenclatureSearchType3Step4() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 4)
+                .queryParam("type", 3)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, step = 4, type = 4")
+    public void getNomenclatureSearchType4Step4() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 4)
+                .queryParam("type", 4)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, step = 4, type = 5")
+    public void getNomenclatureSearchType5Step4() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 4)
+                .queryParam("type", 5)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Поиск номенклатуры, step = 201, type = 0")
+    public void getNomenclatureSearchStep201() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 201)
+                .queryParam("type", 0)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, step = 201.1, type = 1")
+    public void getNomenclatureSearchStep201Double() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 201.1)
+                .queryParam("type", 1)
+                .queryParam("data", "Болт")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, step = 0, type = 1")
+    public void getNomenclatureSearchStepZero() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", 0)
+                .queryParam("type", 1)
+                .queryParam("data", "01сб")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, step = -1, type = 4")
+    public void getNomenclatureSearchStepNegative() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", -1)
+                .queryParam("type", 4)
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Поиск номенклатуры, step = -0.1, type = 5")
+    public void getNomenclatureSearchStepNegativeDouble() {
+        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        given()
+                .when()
+                .queryParam("step", -0.1)
+                .queryParam("type", 5)
+                .queryParam("data", "00")
+                .get("nomenclature/search")
+                .then().log().all();
+        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
 }
