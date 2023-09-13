@@ -77,7 +77,7 @@ public class Nomenclature {
                 // .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"))
                 .statusCode(200);
     }
-
+//////////////////////////////////Поиск номенклатуры/////////////////////////////////////////////////////
     @Test
     @Description("Поиск номенклатуры, валидация Json схема")
     public void getNomenclatureSearch() {
@@ -153,8 +153,90 @@ public class Nomenclature {
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
-
-
+    @Test
+    @Description("Поиск номенклатуры, получение пустого массива data = Bolt ")
+    public void getNomenclatureSearchBodyIsEmpty() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 0)
+                .queryParam("data", "Bolt")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(0));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type=1 ")
+    public void getNomenclatureSearchBodyIsEmpty1() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 1)
+                .queryParam("data", "Bolt")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(0));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type= 2 ")
+    public void getNomenclatureSearchBodyIsEmpty2() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 2)
+                .queryParam("data", "Bolt")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(0));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type= 3 ")
+    public void getNomenclatureSearchBodyIsEmpty3() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 3)
+                .queryParam("data", "Bolt")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(0));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type= 4 ")
+    public void getNomenclatureSearchBodyIsEmpty4() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 4)
+                .queryParam("data", "Bolt")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(0));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type= 5 ")
+    public void getNomenclatureSearchBodyIsEmpty5() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 5)
+                .queryParam("data", "Bolt")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(0));
+        deleteSpec();
+    }
 
 
     ////////////////////////Поиск номенклатуры, негативные тесты////////////////////////////////
