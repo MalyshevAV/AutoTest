@@ -8,6 +8,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static Specifications.Specifications.*;
 import static io.restassured.RestAssured.given;
@@ -17,7 +20,7 @@ public class Nomenclature {
 
     @Test
     @Description("Получение базовой услуги по Гуид, валидация по схеме Json")
-    public void getBasicServicesGuid(){
+    public void getBasicServicesGuid() {
         installSpec(requestSpecification(), responseSpecification());
         given()
                 .when()
@@ -27,9 +30,10 @@ public class Nomenclature {
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"));
         deleteSpec();
     }
+
     @Test
     @Description("НЕ ДОПИЛЕН Получение номенклатуры по Гуид, валидация по схеме Json")
-    public void getNomenclatureGuid(){
+    public void getNomenclatureGuid() {
         installSpec(requestSpecification(), responseSpecification());
         given()
                 .auth().basic("Administrator", "1234567809")
@@ -40,6 +44,26 @@ public class Nomenclature {
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureGuid.json"));
         deleteSpec();
     }
+
+    @Test
+    @Description("Создаем заявку на добавление, изменение, удаление номенклатуры")
+    public void postNomenclatureChangeRequest()  {
+        Map<String, Object> jsonAsMap = new HashMap<>();
+        jsonAsMap.put("fio", "Иванов Иван Иванович");
+        jsonAsMap.put("email", "ivanov@yandex.ru");
+        jsonAsMap.put("comment", "ivanov@yandex.ru");
+
+        given()
+                .auth().basic("Administrator", "1234567809").and()
+                .header("x-se-hash",  "cfcd208495d565ef66e7dff9f98764da")
+                .body(jsonAsMap)
+                .when()
+                .post("nomenclature/937a6068-3d9b-11ee-918f-7824af8ab721")
+                .then().log().all()
+                .assertThat()
+               // .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"))
+                .statusCode(200);
+}
 //    @Test
 //    @Description("Создаем заявку на добавление, изменение, удаление номенклатуры")
 //    // Using HashMap
