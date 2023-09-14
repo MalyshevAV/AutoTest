@@ -85,7 +85,7 @@ public class Nomenclature {
         given()
                 .when()
                 .queryParam("step", 176)
-                .queryParam("type", 0)
+                .queryParam("type", 5)
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all()
@@ -124,6 +124,41 @@ public class Nomenclature {
         deleteSpec();
     }
     @Test
+    @Description("Поиск номенклатуры, type = 3, data = f3ec794a-35d5-11ee-918f-7824af8ab721 возвращает 2 объекта")
+    public void getNomenclatureSearchType3_TwoObjects() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 5)
+                .queryParam("type", 3)
+                .queryParam("data", "f3ec794a-35d5-11ee-918f-7824af8ab721")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(2))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+    @Test
+    @Description("Поиск номенклатуры, type = 3, data = f3ec794a-35d5-11ee-918f-7824af8ab720 возвращает 1 объект")
+    public void getNomenclatureSearchType3_OneObject() {
+        installSpec(requestSpecification(), Specifications.responseSpecification());
+        given()
+                .when()
+                .queryParam("step", 200)
+                .queryParam("type", 3)
+                .queryParam("data", "f3ec794a-35d5-11ee-918f-7824af8ab720")
+                .get("nomenclature/search")
+                .then().log().all()
+                .body("size()", is(1))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+        deleteSpec();
+    }
+
+
+
+
+
+    @Test
     @Description("Поиск номенклатуры, type = 4")
     public void getNomenclatureSearchType4() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
@@ -154,7 +189,7 @@ public class Nomenclature {
         deleteSpec();
     }
     @Test
-    @Description("Поиск номенклатуры, получение пустого массива data = Bolt ")
+    @Description("Поиск номенклатуры, получение пустого тела, data = Bolt ")
     public void getNomenclatureSearchBodyIsEmpty() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
@@ -168,7 +203,7 @@ public class Nomenclature {
         deleteSpec();
     }
     @Test
-    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type=1 ")
+    @Description("Поиск номенклатуры, получение пустого тела, data = Bolt type=1 ")
     public void getNomenclatureSearchBodyIsEmpty1() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
@@ -182,7 +217,7 @@ public class Nomenclature {
         deleteSpec();
     }
     @Test
-    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type= 2 ")
+    @Description("Поиск номенклатуры, получение пустого тела, data = Bolt type= 2 ")
     public void getNomenclatureSearchBodyIsEmpty2() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
@@ -196,21 +231,21 @@ public class Nomenclature {
         deleteSpec();
     }
     @Test
-    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type= 3 ")
+    @Description("Поиск номенклатуры, получение пустого тела, data = Невалидный Гуид type= 3 ")
     public void getNomenclatureSearchBodyIsEmpty3() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
                 .queryParam("step", 5)
                 .queryParam("type", 3)
-                .queryParam("data", "Bolt")
+                .queryParam("data", "f3ec794a-35d5-11ee-918f-7824af8ab7")
                 .get("nomenclature/search")
                 .then().log().all()
                 .body("size()", is(0));
         deleteSpec();
     }
     @Test
-    @Description("Поиск номенклатуры, получение пустого тела data = Bolt type= 4 ")
+    @Description("Поиск номенклатуры, получение пустого тела, data = Bolt type= 4 ")
     public void getNomenclatureSearchBodyIsEmpty4() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
@@ -254,7 +289,7 @@ public class Nomenclature {
         deleteSpec();
     }
     @Test
-    @Description("Поиск номенклатуры, поле Typ = -1")
+    @Description("Поиск номенклатуры, поле Typу = -1")
     public void getNomenclatureSearchType() {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
         given()
@@ -426,7 +461,6 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -440,7 +474,6 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -454,22 +487,20 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
 
     @Test
-    @Description("Поиск номенклатуры, step = 201, type = 0")
+    @Description("Поиск номенклатуры, step = 201, type = 3")
     public void getNomenclatureSearchStep201() {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
         given()
                 .when()
                 .queryParam("step", 201)
-                .queryParam("type", 0)
+                .queryParam("type", 3)
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -483,7 +514,6 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -497,7 +527,6 @@ public class Nomenclature {
                 .queryParam("data", "01сб")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -511,7 +540,6 @@ public class Nomenclature {
                 .queryParam("data", "00")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
 
@@ -526,7 +554,6 @@ public class Nomenclature {
                 .queryParam("data", "00")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
 }
