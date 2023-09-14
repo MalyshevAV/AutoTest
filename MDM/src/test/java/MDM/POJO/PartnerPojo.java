@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PartnerPojo {
 
 
+
         private String guid;
         private String name;
         private String nameFull;

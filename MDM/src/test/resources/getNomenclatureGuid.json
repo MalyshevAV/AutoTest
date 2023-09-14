@@ -1,75 +1,376 @@
 {
-  "guid": "F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4",
-  "guidBE": "УникальныйКодБЕ",
-  "code": "0000000004",
-  "archive": false,
-  "dateOutputArchive": "2023-07-15",
-  "obsolete": false,
-  "referencePosition": "F7778C5E-CEB2-4faa-B6BF-329BF39FA1E4",
-  "name": "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012",
-  "fullName": "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012 (Полное наименование)",
-  "namePurchasing": "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012 (Наименование для централизованных закупок)",
-  "nameSale": "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012 (Наименование для централизованных продаж)",
-  "ownershipSign": "0",
-  "analyticsPurchasable": "H7778C5E-CEB2-4faa-B6BF-329BF39FA1E4",
-  "baseUnit": "796",
-  "drawingDenotation": "24379.1-2012",
-  "material": "1.01ХХ — 1.09ХХ",
-  "materialGOST": "ГОСТ 1.0-92",
-  "sortament": "Швеллер",
-  "sortamentGOST": "ГОСТ 8240-97",
-  "seriality": "1",
-  "unifiedСlassifier": "G7778C5E-CEB2-4faa-B6BF-329BF39FA1E4",
-  "codeUC": "01.02.01",
-  "classifierEOP": "EOP78C5E-CEB2-4faa-B6BF-329BF39FA1E4",
-  "codeEOP": "07.05.06",
-  "includedEOP": true,
-  "mainManufacturer": false,
-  "internalCooperation": false,
-  "oneTimePurchase": false,
-  "groupCost": "G7778C5E-CEB2-4faa-B6BF-329BF39FA1E4",
-  "TNVED": "106141010",
-  "OKVED": "01.11.39",
-  "OKPD2": "01.11.11.112",
-  "height": "12,330",
-  "width": "1,450",
-  "length": "9,985",
-  "dimensionsUnit": "796",
-  "weight": "1,500",
-  "weightUnit": "796",
-  "service": false,
-  "electronicCatalog": true,
-  "image": "\\\\images\\product.jpg",
-  "comment": "Комментарий к номенклатуре",
-  "properties": [
-    {
-      "guid": "P7778C5E-CEB2-4faa-B6BF-329BF39FA1E4",
-      "name": "Цвет",
-      "value": "Синий",
-      "unit": "796"
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "guid": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "code": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 9
+    },
+    "archive": {
+      "type": "boolean"
+    },
+    "dateOutputArchive": {
+      "type": ["string", "null"],
+      "minLength": 0,
+      "maxLength": 15
+    },
+    "obsolete": {
+      "type": "boolean"
+    },
+    "referencePosition": {
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "consolidatedRecord": {
+      "type": "boolean"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 150
+    },
+    "fullName": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "namePurchasing": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 500
+    },
+    "nameSale": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 500
+    },
+    "ownershipSign": {
+      "type": "integer",
+      "enum": [0, 1]
+    },
+    "analyticsPurchasable": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 500
+    },
+    "baseUnit": {
+      "type": "integer",
+      "minLength": 0,
+      "maxLength": 4
+    },
+    "drawingDenotation": {
+      "type": ["string", "null"],
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "material": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "materialGOST": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "sortament": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "sortamentGOST": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "seriality": {
+      "type": "string",
+      "enum": [
+        "Серийная",
+        "Новая",
+        "Разовая",
+        "Прочая"
+      ]
+    },
+    "unifiedСlassifier": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "codeUC": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 50
+    },
+    "classifierEOP": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "codeEOP": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 50
+    },
+    "includedEOP": {
+      "type": "boolean"
+    },
+    "mainManufacturer": {
+      "type": ["boolean","null"]
+    },
+    "internalCooperation": {
+      "type": ["boolean","null"]
+    },
+    "oneTimePurchase": {
+      "type": ["boolean","null"]
+    },
+    "groupCost": {
+      "type": ["boolean","null"]
+    },
+    "TNVED": {
+      "type": "integer",
+      "minLength": 0,
+      "maxLength": 50
+    },
+    "OKVED": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 7
+    },
+    "OKPD2": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 12
+    },
+    "height": {
+      "type": ["number", "null"],
+      "minLength": 0,
+      "maxLength": 30
+
+    },
+    "width": {
+      "type": ["number", "null"],
+      "minLength": 0,
+      "maxLength": 30
+
+    },
+    "length": {
+      "type": ["number", "null"],
+      "minLength": 0,
+      "maxLength": 30
+    },
+    "dimensionsUnit": {
+      "type": ["integer", "null"],
+      "minLength": 0,
+      "maxLength": 4
+    },
+    "weight": {
+      "type": ["number", "null"],
+      "minLength": 0,
+      "maxLength": 30
+    },
+    "weightUnit": {
+      "type": ["integer", "null"],
+      "minLength": 0,
+      "maxLength": 4
+    },
+    "service": {
+      "type": "boolean"
+    },
+    "electronicCatalog": {
+      "type": "boolean"
+    },
+    "image": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 250
+    },
+    "comment": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "properties": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "guid": {
+              "type": "string",
+              "minLength": 36,
+              "maxLength": 36
+
+            },
+            "name": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 50
+            },
+            "value": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 150
+            },
+            "unit": {
+              "type": "integer",
+              "minLength": 0,
+              "maxLength": 4
+            }
+          },
+          "required": [
+            "guid",
+            "name",
+            "value",
+            "unit"
+          ]
+        }
+      ]
+    },
+    "alternativeUnit": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "unit": {
+              "type": "integer",
+              "minLength": 0,
+              "maxLength": 4
+            },
+            "conversionFactor": {
+              "type": "number",
+              "minLength": 0,
+              "maxLength": 30
+            },
+            "description": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 255
+            }
+          },
+          "required": [
+            "unit",
+            "conversionFactor",
+            "description"
+          ]
+        }
+      ]
+    },
+    "analogue": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "product": {
+              "type": "string",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "analogue": {
+              "type": "boolean"
+            },
+            "basis": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 255
+            }
+          },
+          "required": [
+            "product",
+            "analogue",
+            "basis"
+          ]
+        }
+      ]
+    },
+    "occurrences": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36
+        }
+      ]
+    },
+    "spares": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36
+        }
+      ]
+    },
+    "suppliers": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36
+        }
+      ]
     }
-  ],
-  "alternativeUnit": [
-    {
-      "unit": "796",
-      "conversionFactor": "2.278",
-      "description": "Описание основного назначения альтернативной единицы измерения"
-    }
-  ],
-  "analogue": [
-    {
-      "product": "P5558C5E-CEB2-4faa-B6BF-329BF39FA1E4",
-      "analogue": true,
-      "basis": "Описание основания установления аналога"
-    }
-  ],
-  "occurrences": [
-    "P7778C5E-CEB2-4faa-B6BF-329BF39FA1E4"
-  ],
-  "spares": [
-    "L7778C5E-CEB2-4faa-B6BF-329BF39FA1E4"
-  ],
-  "suppliers": [
-    "P7778C5E-CEB2-4faa-B6BF-329BF39FA1E4"
+  },
+  "required": [
+    "guid",
+    "code",
+    "archive",
+    "dateOutputArchive",
+    "obsolete",
+    "referencePosition",
+    "consolidatedRecord",
+    "name",
+    "fullName",
+    "namePurchasing",
+    "nameSale",
+    "ownershipSign",
+    "analyticsPurchasable",
+    "baseUnit",
+    "drawingDenotation",
+    "material",
+    "materialGOST",
+    "sortament",
+    "sortamentGOST",
+    "seriality",
+    "unifiedСlassifier",
+    "codeUC",
+    "classifierEOP",
+    "codeEOP",
+    "includedEOP",
+    "mainManufacturer",
+    "internalCooperation",
+    "oneTimePurchase",
+    "groupCost",
+    "TNVED",
+    "OKVED",
+    "OKPD2",
+    "height",
+    "width",
+    "length",
+    "dimensionsUnit",
+    "weight",
+    "weightUnit",
+    "service",
+    "electronicCatalog",
+    "image",
+    "comment",
+    "properties",
+    "alternativeUnit",
+    "analogue",
+    "occurrences",
+    "spares",
+    "suppliers"
   ]
 }
