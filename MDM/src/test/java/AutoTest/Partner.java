@@ -1,6 +1,7 @@
 package AutoTest;
 
 import MDM.POJO.PartnerPojo;
+import Specifications.GetPositivedataprovider;
 import io.qameta.allure.Description;
 
 
@@ -14,6 +15,7 @@ import java.util.List;
 import static Specifications.Specifications.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class Partner  {
     @Test
@@ -42,22 +44,45 @@ public class Partner  {
         response.forEach(x-> Assert.assertEquals(x.getKpp().length(), 9));
         deleteSpec();
     }
+    @Test(dataProvider = "positiveData", dataProviderClass = GetPositivedataprovider.class)
+    @Description("Получение списка партнеров")
+    public void getPartnerListUsingProvader(int value) {
+        installSpec(requestSpecification(), responseSpecification());
 
-    @Test
-    @Description("Негативный тест Получение списка партнеров")
-    public void getPartnerListExpected400() {
         List<PartnerPojo> response =
-                given().spec(requestSpecification())
-                        .queryParam("step", "<script>alert( 'Hello world' );</script>")
+                given()
+                        .queryParam("step", value)
                         .when()
                         .get("/partner")
                         .then()
-                        .spec(responseSpecification400())
                         .log().all()
                         .extract().body().jsonPath().getList(".", PartnerPojo.class);
     }
 
-    @Test
+
+//    @Test
+//    @Description("Негативный тест Получение списка партнеров")
+//    public void getPartnerListExpected400(S) {
+//        List<PartnerPojo> response =
+//                given().spec(requestSpecification())
+//                        .queryParam("step", )
+//                        .when()
+//                        .get("/partner")
+//                        .then()
+//                        .spec(responseSpecification400())
+//                        .log().all()
+//                        .extract().body().jsonPath().getList(".", PartnerPojo.class);
+//    }
+//
+//
+
+
+
+
+
+
+
+   @Test
     @Description("Получение списка партнеров по Гуид")
     public void getPartnerGuid(){
         installSpec(requestSpecification(), responseSpecification());

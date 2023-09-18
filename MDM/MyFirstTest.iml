@@ -80,5 +80,8 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.jooq:joor-java-8:0.9.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:3.4.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.15.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.aesh:aesh:2.7" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.aesh:readline:2.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.fusesource.jansi:jansi:2.4.0" level="project" />
   </component>
 </module>

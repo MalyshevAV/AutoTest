@@ -5,6 +5,7 @@ import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -17,6 +18,19 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class Nomenclature {
+
+
+    @DataProvider
+    public static Object[][] test() {
+        return new Object[][]{
+                {5, 0, "Болт"},
+                {"", 1, "Болт"},
+                {100, 2, "01сб"},
+                {6, 4, "00"},
+                {176, 5, "Болт"}
+
+        };
+    }
 
     @Test
     @Description("Получение базовой услуги по Гуид, валидация по схеме Json")
@@ -58,7 +72,7 @@ public class Nomenclature {
                 .header("x-se-hash",  "cfcd208495d565ef66e7dff9f98764da")
                 .body(jsonAsMap)
                 .when()
-                .post("nomenclature/937a6068-3d9b-11ee-918f-7824af8ab721")
+                .post("nomenclature")
                 .then().log().all()
                 .assertThat()
                // .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"))
@@ -95,7 +109,7 @@ public class Nomenclature {
                // .multiPart(new File(".\\src\\test\\resources\\postNomenclatureUsingJsonFil.json"))
                 .body(file)
                 .when()
-                .post("/nomenclature/937a6068-3d9b-11ee-918f-7824af8ab721")
+                .post("nomenclature/")
                 .then().log().all()
                 .assertThat()
                 // .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"))
@@ -117,6 +131,21 @@ public class Nomenclature {
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
+//    @Test(dataProvider = "test")
+//    @Description("Поиск номенклатуры, DataProvider")
+//    public void getNomenclatureSearchDataProvider(Object step, int type, String data) {
+//        installSpec(requestSpecification(), Specifications.responseSpecification());
+//        given()
+//                .when()
+//                .queryParam("step", step)
+//                .queryParam("type", type)
+//                .queryParam("data", data)
+//                .get("nomenclature/search")
+//                .then().log().all()
+//                .body("size()", is(step))
+//                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+//        deleteSpec();
+//    }
     @Test
     @Description("Поиск номенклатуры, type = 1")
     public void getNomenclatureSearchType1() {
@@ -128,7 +157,7 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all()
-               .body("size()", is(176))
+                .body("size()", is(176))
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
@@ -148,17 +177,17 @@ public class Nomenclature {
         deleteSpec();
     }
     @Test
-    @Description("Поиск номенклатуры, type = 3, data = f3ec794a-35d5-11ee-918f-7824af8ab721 возвращает 2 объекта")
+    @Description("Поиск номенклатуры, type = 3, data = 8e7275eb-3049-11ee-b5ae-005056013b0c возвращает 4 объекта")
     public void getNomenclatureSearchType3_TwoObjects() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
                 .queryParam("step", 5)
                 .queryParam("type", 3)
-                .queryParam("data", "f3ec794a-35d5-11ee-918f-7824af8ab721")
+                .queryParam("data", "8e7275eb-3049-11ee-b5ae-005056013b0c")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(2))
+                .body("size()", is(4))
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
@@ -223,7 +252,8 @@ public class Nomenclature {
                 .queryParam("data", "Bolt")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(0));
+                .body("size()", is(0))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -237,7 +267,8 @@ public class Nomenclature {
                 .queryParam("data", "Bolt")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(0));
+                .body("size()", is(0))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -251,7 +282,8 @@ public class Nomenclature {
                 .queryParam("data", "Bolt")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(0));
+                .body("size()", is(0))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -265,7 +297,9 @@ public class Nomenclature {
                 .queryParam("data", "f3ec794a-35d5-11ee-918f-7824af8ab7")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(0));
+                .body("size()", is(0))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
+
         deleteSpec();
     }
     @Test
@@ -279,7 +313,8 @@ public class Nomenclature {
                 .queryParam("data", "Bolt")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(0));
+                .body("size()", is(0))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -293,7 +328,8 @@ public class Nomenclature {
                 .queryParam("data", "Bolt")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(0));
+                .body("size()", is(0))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
 
@@ -419,7 +455,7 @@ public class Nomenclature {
     }
     @Test
     @Description("Поиск номенклатуры, поле Type = латиница+кириллица+числа+спецсиволы")
-    public void getNomenclatureSearchSpecialSymbolвs() {
+    public void getNomenclatureSearchSpecialSymbolsString() {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
         given()
                 .when()
@@ -442,7 +478,6 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all();
-               // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
 
@@ -457,7 +492,6 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
@@ -471,7 +505,6 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all();
-        // .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
     @Test
