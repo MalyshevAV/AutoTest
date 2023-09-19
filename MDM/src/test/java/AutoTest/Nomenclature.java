@@ -31,6 +31,15 @@ public class Nomenclature {
 
         };
     }
+        @DataProvider
+        public static Object[][] guid() {
+            return new Object[][]{
+                    {"13513a3e-36d6-11ee-b5b0-005026013b0c1"},
+                 //   {"13513a3e-36d6-11ee-b5b0-005056013b0c1"},
+
+
+            };
+        }
 
     @Test
     @Description("Получение базовой услуги по Гуид, валидация по схеме Json")
@@ -38,46 +47,57 @@ public class Nomenclature {
         installSpec(requestSpecification(), responseSpecification());
         given()
                 .when()
-                .get("basic-services/937a6068-3d9b-11ee-918f-7824af8ab721/09bdd436-3da3-11ee-918f-7824af8ab721")
+                .get("basic-services/843dabce-3c42-11ee-b5b0-005056013b0c")
                 .then().log().all()
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"));
         deleteSpec();
     }
-
+////////////////////////////////////////////"Получение номенклатуры по Гуид////////////////////////////////////////
     @Test
-    @Description("НЕ ДОПИЛЕН Получение номенклатуры по Гуид, валидация по схеме Json")
+    @Description("Получение номенклатуры по Гуид, валидация по схеме Json")
     public void getNomenclatureGuid() {
         installSpec(requestSpecification(), responseSpecification());
         given()
-                .auth().basic("Administrator", "1234567809")
                 .when()
-                .get("nomenclature/937a6068-3d9b-11ee-918f-7824af8ab721/6cec812a-35d6-11ee-918f-7824af8ab721")
+                .get("nomenclature/13513a3e-36d6-11ee-b5b0-005056013b0c")
                 .then().log().all()
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureGuid.json"));
         deleteSpec();
     }
 
-    @Test
-    @Description("Создаем заявку на добавление, изменение, удаление номенклатуры")
-    public void postNomenclatureChangeRequest()  {
-        Map<String, Object> jsonAsMap = new HashMap<>();
-        jsonAsMap.put("fio", "Иванов Иван Иванович");
-        jsonAsMap.put("email", "ivanov@yandex.ru");
-        jsonAsMap.put("comment", "ivanov@yandex.ru");
-
+    @Test(dataProvider = "guid")
+    @Description("Получение нономенклатуры по Гуид, негативные тесты")
+    public void getNomenclatureGuidDataProvider(String guid) {
+        installSpec(requestSpecification(), responseSpecification400());
         given()
-                .auth().basic("Administrator", "1234567809").and()
-                .header("x-se-hash",  "cfcd208495d565ef66e7dff9f98764da")
-                .body(jsonAsMap)
                 .when()
-                .post("nomenclature")
-                .then().log().all()
-                .assertThat()
-               // .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"))
-                .statusCode(200);
-}
+                .pathParam("guid", guid)
+                .get("nomenclature/{guid}")
+                .then().log().all();
+        deleteSpec();
+    }
+
+    @Test
+    @Description("Получение номенклатуры по Гуид, валидация по схеме Json")
+    public void getNomenclatureGuidTest() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("nomenclature/13513a3e-36d6-11ee-b5b0-005056013b0c1")
+                .then().log().all();
+        deleteSpec();
+    }
+
+
+
+
+
+
+
+
+
 //    @Test
 //    @Description("Создаем заявку на добавление, изменение, удаление номенклатуры")
 //    // Using HashMap
@@ -97,24 +117,7 @@ public class Nomenclature {
 //                .statusCode(200);
 //   }
 
-    @Test
-    @Description("Создаем заявку на добавление, изменение, удаление номенклатуры")
-    // Using Json File
-    public void postNomenclatureBeUsingJsonFile()  {
-        File file = new File("C:\\Users\\Sasha\\TEST\\Auto_test\\MDM\\src\\test\\resources\\postNomenclatureUsingJsonFil.json");
 
-        given()
-                .auth().basic("Administrator", "1234567809").and()
-                .header("x-se-hash",  "cfcd208495d565ef66e7dff9f98764da")
-               // .multiPart(new File(".\\src\\test\\resources\\postNomenclatureUsingJsonFil.json"))
-                .body(file)
-                .when()
-                .post("nomenclature/")
-                .then().log().all()
-                .assertThat()
-                // .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"))
-                .statusCode(200);
-    }
 //////////////////////////////////Поиск номенклатуры/////////////////////////////////////////////////////
     @Test
     @Description("Поиск номенклатуры, валидация Json схема")
@@ -421,7 +424,7 @@ public class Nomenclature {
         given()
                 .when()
                 .queryParam("step", 5)
-                .queryParam("type", 2147483647)
+                .queryParam("type",Integer.MAX_VALUE)
                 .queryParam("data", "00")
                 .get("nomenclature/search")
                 .then().log().all();

@@ -38,6 +38,11 @@ public class Specifications {
                 .expectStatusCode(404)
                 .build();
     }
+    public static ResponseSpecification responseSpecification500() {
+        return new ResponseSpecBuilder()
+                .expectStatusCode(500)
+                .build();
+    }
 
     public static void installSpec(RequestSpecification request, ResponseSpecification response){
         RestAssured.requestSpecification = request;

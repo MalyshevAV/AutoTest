@@ -134,17 +134,17 @@
     "groupCost": {
       "type": ["boolean","null"]
     },
-    "TNVED": {
+    "tnved": {
       "type": "integer",
       "minLength": 0,
       "maxLength": 50
     },
-    "OKVED": {
+    "okved": {
       "type": "string",
       "minLength": 0,
       "maxLength": 7
     },
-    "OKPD2": {
+    "okpd2": {
       "type": "string",
       "minLength": 0,
       "maxLength": 12
@@ -353,9 +353,9 @@
     "internalCooperation",
     "oneTimePurchase",
     "groupCost",
-    "TNVED",
-    "OKVED",
-    "OKPD2",
+    "tnved",
+    "okved",
+    "okpd2",
     "height",
     "width",
     "length",

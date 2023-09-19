@@ -27,4 +27,14 @@ public class GetPositivedataprovider {
                     {4}
             };
     }
+
+    @DataProvider
+    @Description("Невалидный Type ")
+    public static Object[][] negativeType() {
+        return new Object[][]{
+                {6},
+                {-1},
+                {100},
+        };
+    }
 }

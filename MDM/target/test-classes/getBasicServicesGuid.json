@@ -7,11 +7,6 @@
       "minLength": 36,
       "maxLength": 36
     },
-    "guidBE": {
-      "type": "string",
-      "minLength": 36,
-      "maxLength": 36
-    },
     "name": {
       "type": "string",
       "minLength": 0,
@@ -21,9 +16,6 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 150
-    },
-    "OKVED": {
-      "type": "string"
     },
     "code": {
       "type": "string",
@@ -41,7 +33,7 @@
       "maxLength": 150
     },
     "estimateNumber": {
-      "type": "string",
+      "type": "integer",
       "minLength": 0,
       "maxLength": 15
     },
@@ -57,5 +49,5 @@
       "maxLength": 15
     }
   },
-  "required": ["guid", "code", "guidBE", "name", "estimate", "nomenclature", "process", "estimateNumber", "OKVED", "re-exhibited", "internal", "codeUC"]
+  "required": ["guid", "code", "name", "estimate", "nomenclature", "process", "estimateNumber", "re-exhibited", "internal", "codeUC"]
 }
