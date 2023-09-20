@@ -911,7 +911,7 @@ public class ClassifireIsAllRussian {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
         given()
                 .when()
-                .queryParam("step", 2147483647)
+                .queryParam("step", Integer.MAX_VALUE)
                 .get("tnved")
                 .then().log().all();
         deleteSpec();

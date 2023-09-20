@@ -18,6 +18,17 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class Partner  {
+
+    public List<PartnerPojo> getResponse() {
+        return given()
+                .when()
+                .get("/partner")
+                .then()
+                .log().all()
+                .extract().body().jsonPath().getList(".", PartnerPojo.class);
+
+    }
+
     @Test
     @Description("Получение списка партнеров")
     public void getPartnerList() {
@@ -44,6 +55,12 @@ public class Partner  {
         response.forEach(x-> Assert.assertEquals(x.getKpp().length(), 9));
         deleteSpec();
     }
+
+
+
+
+
+
     @Test(dataProvider = "positiveData", dataProviderClass = GetPositivedataprovider.class)
     @Description("Получение списка партнеров")
     public void getPartnerListUsingProvader(int value) {
@@ -59,22 +76,6 @@ public class Partner  {
                         .extract().body().jsonPath().getList(".", PartnerPojo.class);
     }
 
-
-//    @Test
-//    @Description("Негативный тест Получение списка партнеров")
-//    public void getPartnerListExpected400(S) {
-//        List<PartnerPojo> response =
-//                given().spec(requestSpecification())
-//                        .queryParam("step", )
-//                        .when()
-//                        .get("/partner")
-//                        .then()
-//                        .spec(responseSpecification400())
-//                        .log().all()
-//                        .extract().body().jsonPath().getList(".", PartnerPojo.class);
-//    }
-//
-//
 
 
 
