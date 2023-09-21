@@ -35,6 +35,16 @@ public class GetPositivedataprovider {
                 {6},
                 {-1},
                 {100},
+                {Integer.MAX_VALUE}
+        };
+    }
+    @DataProvider
+    @Description("Невалидный Type ")
+    public static Object[][] negativeTypeString() {
+        return new Object[][]{
+                {"Select"},
+                {"<script>alert( 'Hello world' );</script>"},
+                {"select*FROM users"}
         };
     }
 }

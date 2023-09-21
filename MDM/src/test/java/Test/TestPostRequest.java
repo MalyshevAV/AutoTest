@@ -163,6 +163,99 @@ public class TestPostRequest {
 //                .assertThat()
 //                .body(notNullValue(), hasSize((36)));
     }
+    @Test(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
+    @Description("Создаем заявку минимальное значение в в атрибутах")
+    public void postNomenclatureChangeRequestVinValue(int value) {
+        installSpec(requestSpecification(), responseSpecification());
+        HashMap<String, Object> postNomenclature = new HashMap<>();
+        HashMap<String, Object> autor = new HashMap<>();
+        HashMap<String, Object> data = new HashMap<>();
+
+        postNomenclature.put("type", value); // Параметризация значений с помощью Data Provider
+        postNomenclature.put("comment", "К");
+        postNomenclature.put("guid", "8e7275eb-3049-11ee-b5ae-005056013b0c");
+        postNomenclature.put("autor", autor);
+        postNomenclature.put("data", data);
+
+        autor.put("fio", "И");
+        autor.put("email", "i");
+
+        data.put("guid", "F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
+        data.put("guidBE", "H9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
+        data.put("be", "М");
+        data.put("codeUC", "0");
+        data.put("name", "Б");
+        data.put("fullName", "Б");
+        data.put("drawingDenotation", "2");
+        data.put("ownershipSign", 0);
+        data.put("seriality", 1);
+        data.put("supplier", true);
+        data.put("baseUnit", 7);
+        data.put("height", "1");
+        data.put("width", "1");
+        data.put("length", "9");
+        data.put("dimensionsUnit", 7);
+        data.put("weight", "1");
+        data.put("weightUnit", 7);
+        given()
+                .header("x-se-hash", "cfcd208495d565ef66e7dff9f98764da")
+                .body(postNomenclature)
+                .when()
+                .post("nomenclature/")
+                .then().log().all();
+//                .assertThat()
+//                .body(notNullValue(), hasSize((36)));
+    }
+        @Test(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
+        @Description("Создаем заявку c Максимальным значением в атрибутах")
+        public void postNomenclatureChangeRequestMax(int value) {
+            installSpec(requestSpecification(), responseSpecification());
+            HashMap<String, Object> postNomenclature = new HashMap<>();
+            HashMap<String, Object> autor = new HashMap<>();
+            HashMap<String, Object> data = new HashMap<>();
+
+            postNomenclature.put("type", value); // Параметризация значений с помощью Data Provider
+            postNomenclature.put("comment", "цу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про л");
+            postNomenclature.put("guid", "8e7275eb-3049-11ee-b5ae-005056013b0c");
+            postNomenclature.put("autor", autor);
+            postNomenclature.put("data", data);
+
+            autor.put("fio", "йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()");
+            autor.put("email", "йцу кен гшщ зхъ фва про лдж эя");
+
+            data.put("guid", "F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
+            data.put("guidBE", "H9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
+            data.put("be", "8e7275eb-3049-11ee-b5ae-005056013b0c");
+            data.put("codeUC", "01.02.01");
+            data.put("name", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012");
+            data.put("fullName", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012 (Полное наименование))");
+            data.put("drawingDenotation", "24379.1-2012");
+            data.put("ownershipSign", 0);
+            data.put("seriality", 1);
+            data.put("supplier", true);
+            data.put("baseUnit", 796);
+            data.put("height", "12,330");
+            data.put("width", "1,450");
+            data.put("length", "9,985");
+            data.put("dimensionsUnit", 796);
+            data.put("weight", "1,500");
+            data.put("weightUnit", 796);
+            given()
+                    .header("x-se-hash", "cfcd208495d565ef66e7dff9f98764da")
+                    .body(postNomenclature)
+                    .when()
+                    .post("nomenclature/")
+                    .then().log().all();
+//                .assertThat()
+//                .body(notNullValue(), hasSize((36)));
+
+
+
+
+
+
+
+
 
 
     @Test(dataProvider = "negativeType", dataProviderClass = GetPositivedataprovider.class)
@@ -170,6 +263,9 @@ public class TestPostRequest {
     public void postNomenclatureChangeRequestMapNegative(int negativeValue) {
         postNomenclatureChangeRequestMap(negativeValue);
     }
+
+
+
     @Test
     @Description("Создаем заявку значения max+1")
     public void postNomenclatureChangeRequestMaxPlus() throws IOException {
