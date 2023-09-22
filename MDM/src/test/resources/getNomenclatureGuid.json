@@ -141,19 +141,19 @@
       "type": ["boolean","null"]
     },
     "tnved": {
-      "type": "integer",
-      "minLength": 0,
-      "maxLength": 50
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
     },
     "okved": {
-      "type": "string",
-      "minLength": 0,
-      "maxLength": 7
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
     },
     "okpd2": {
-      "type": "string",
-      "minLength": 0,
-      "maxLength": 12
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
     },
     "height": {
       "type": ["number", "null"],
@@ -236,9 +236,9 @@
               "maxLength": 150
             },
             "unit": {
-              "type": "integer",
-              "minLength": 0,
-              "maxLength": 4
+              "type": "string",
+              "minLength": 36,
+              "maxLength": 36
             }
           },
           "required": [
@@ -257,9 +257,9 @@
           "type": "object",
           "properties": {
             "unit": {
-              "type": "integer",
-              "minLength": 0,
-              "maxLength": 4
+              "type": "string",
+              "minLength": 36,
+              "maxLength": 36
             },
             "conversionFactor": {
               "type": "number",
@@ -355,6 +355,7 @@
     "analyticsPurchasable",
     "baseUnit",
     "baseUnitCode",
+    "dimensionsUnitCode",
     "drawingDenotation",
     "material",
     "materialGOST",
@@ -377,8 +378,10 @@
     "width",
     "length",
     "dimensionsUnit",
+    "weightUnitCode ",
     "weight",
     "weightUnit",
+    "weightUnitCode",
     "service",
     "electronicCatalog",
     "image",
