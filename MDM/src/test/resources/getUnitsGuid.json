@@ -27,7 +27,15 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 3
+    },
+    "archive": {
+      "type": "boolean"
+    },
+    "dateOutputArchive": {
+      "type": ["null","string"],
+      "minLength": 10,
+      "maxLength": 10
     }
-  },
-  "required": ["guid","name", "nameFull", "code", "internationalReduction" ]
+},
+  "required": ["guid","name", "nameFull", "code", "internationalReduction", "archive", "dateOutputArchive" ]
 }

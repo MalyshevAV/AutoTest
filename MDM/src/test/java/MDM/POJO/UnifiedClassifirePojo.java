@@ -14,6 +14,12 @@ public class UnifiedClassifirePojo {
     private String tnved;
     private String okved;
     private String okpd2;
+    private boolean archive;
+    private String dateOutputArchive;
+
+    public UnifiedClassifirePojo() {
+        super();
+    }
     @JsonCreator
     public UnifiedClassifirePojo(
             @JsonProperty(value = "guid", required = true) String guid,
@@ -25,7 +31,9 @@ public class UnifiedClassifirePojo {
             @JsonProperty(value = "okp", required = true)String okp,
             @JsonProperty(value = "tnved", required = true) String tnved,
             @JsonProperty(value = "okved", required = true) String okved,
-            @JsonProperty(value = "okpd2", required = true) String okpd2)
+            @JsonProperty(value = "okpd2", required = true) String okpd2,
+            @JsonProperty (value ="archive", required = true) boolean archive,
+            @JsonProperty (value ="dateOutputArchive", required = true) String dateOutputArchive)
     {
         this.guid = guid;
         this.code = code;
@@ -37,6 +45,8 @@ public class UnifiedClassifirePojo {
         this.tnved = tnved;
         this.okved = okved;
         this.okpd2 = okpd2;
+        this.archive = archive;
+        this.dateOutputArchive = dateOutputArchive;
     }
 
     public String getGuid() {
@@ -115,7 +125,24 @@ public class UnifiedClassifirePojo {
         return okpd2;
     }
 
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public void setArchive(boolean archive) {
+        this.archive = archive;
+    }
+
+    public String getDateOutputArchive() {
+        return dateOutputArchive;
+    }
+
+    public void setDateOutputArchive(String dateOutputArchive) {
+        this.dateOutputArchive = dateOutputArchive;
+    }
+
     public void setOkpd2(String okpd2) {
         this.okpd2 = okpd2;
+
     }
 }

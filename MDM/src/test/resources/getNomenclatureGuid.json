@@ -61,10 +61,16 @@
       "maxLength": 500
     },
     "baseUnit": {
-      "type": "integer",
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "baseUnitCode": {
+      "type": "string",
       "minLength": 0,
       "maxLength": 4
     },
+
     "drawingDenotation": {
       "type": ["string", "null"],
       "minLength": 0,
@@ -167,7 +173,12 @@
       "maxLength": 30
     },
     "dimensionsUnit": {
-      "type": ["integer", "null"],
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "dimensionsUnitCode": {
+      "type": "integer",
       "minLength": 0,
       "maxLength": 4
     },
@@ -177,7 +188,12 @@
       "maxLength": 30
     },
     "weightUnit": {
-      "type": ["integer", "null"],
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "weightUnitCode": {
+      "type": "integer",
       "minLength": 0,
       "maxLength": 4
     },
@@ -338,6 +354,7 @@
     "ownershipSign",
     "analyticsPurchasable",
     "baseUnit",
+    "baseUnitCode",
     "drawingDenotation",
     "material",
     "materialGOST",

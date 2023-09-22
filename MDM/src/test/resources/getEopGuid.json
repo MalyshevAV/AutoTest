@@ -21,9 +21,18 @@
       "type": "string",
       "minLength": 36,
       "maxLength": 36
-    }
     },
-  "required": ["guid", "code", "name", "parent"]
+    "archive": {
+      "type": "boolean"
+    },
+    "dateOutputArchive": {
+      "type": ["null","string"],
+      "minLength": 10,
+      "maxLength": 10
+    }
+
+    },
+  "required": ["guid", "code", "name", "parent", "archive", "dateOutputArchive"]
 }
 
 

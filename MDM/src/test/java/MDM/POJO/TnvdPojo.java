@@ -10,7 +10,8 @@ public class TnvdPojo {
     private String unit;
     private boolean commodity;
     private boolean traceableItem;
-
+    private boolean archive;
+    private String dateOutputArchive;
 
     public TnvdPojo() {
         super();
@@ -23,7 +24,10 @@ public class TnvdPojo {
             @JsonProperty(value ="name", required = true) String name,
             @JsonProperty(value ="unit", required = true) String unit,
             @JsonProperty(value ="commodity", required = true) boolean commodity,
-            @JsonProperty (value ="traceableItem", required = true) boolean traceableItem)
+            @JsonProperty (value ="traceableItem", required = true) boolean traceableItem,
+            @JsonProperty (value ="archive", required = true) boolean archive,
+            @JsonProperty (value ="dateOutputArchive", required = true) String dateOutputArchive)
+
     {
         this.guid = guid;
         this.code = code;
@@ -31,7 +35,8 @@ public class TnvdPojo {
         this.unit = unit;
         this.commodity = commodity;
         this.traceableItem = traceableItem;
-
+        this.archive = archive;
+        this.dateOutputArchive = dateOutputArchive;
     }
 
     public String getGuid() {
@@ -81,7 +86,21 @@ public class TnvdPojo {
         this.traceableItem = traceableItem;
     }
 
+    public void setArchive(boolean archive) {
+        this.archive = archive;
+    }
 
+    public void setDateOutputArchive(String dateOutputArchive) {
+        this.dateOutputArchive = dateOutputArchive;
+    }
+
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public String getDateOutputArchive() {
+        return dateOutputArchive;
+    }
 }
 
 

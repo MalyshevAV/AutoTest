@@ -16,7 +16,16 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 150
-            }
+            },
+    "archive": {
+      "type": "boolean"
     },
-  "required": ["guid","code", "name" ]
+    "dateOutputArchive": {
+      "type": ["null","string"],
+      "minLength": 10,
+      "maxLength": 10
+    }
+    },
+
+  "required": ["guid","code", "name", "archive", "dateOutputArchive"]
 }

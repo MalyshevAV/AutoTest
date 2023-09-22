@@ -39,9 +39,10 @@ public class Classifier {
         response.forEach(x -> Assert.assertTrue(x.getName().length() <= 150));
         response.forEach(x -> Assert.assertEquals(x.getOwner().length(), 36));
         response.forEach(x -> Assert.assertTrue(x.getOkp().length() <= 25));
-        response.forEach(x -> Assert.assertTrue(x.getTnved().length() <= 10));
-        response.forEach(x -> Assert.assertTrue(x.getOkved().length() <= 7));
-        response.forEach(x -> Assert.assertTrue(x.getOkpd2().length() <= 12));
+        response.forEach(x -> Assert.assertEquals(x.getTnved().length(), 36));
+        response.forEach(x -> Assert.assertEquals(x.getOkved().length(), 36));
+        response.forEach(x -> Assert.assertEquals(x.getOkpd2().length(), 36));
+        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
         Assertions.assertNotNull(response);
         deleteSpec();
     }
@@ -797,6 +798,7 @@ public class Classifier {
         response.forEach(x -> Assert.assertTrue(x.getName().length() <= 25));
         response.forEach(x -> Assert.assertTrue(x.getNameFull().length() <= 100));
         response.forEach(x -> Assert.assertTrue(x.getInternationalReduction().length() <= 3));
+        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
         Assertions.assertNotNull(response);
         deleteSpec();
     }

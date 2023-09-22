@@ -27,8 +27,16 @@
       },
       "traceableItem": {
         "type": "boolean"
+    },
+       "archive": {
+       "type": "boolean"
+    },
+      "dateOutputArchive": {
+        "type": ["null","string"],
+        "minLength": 10,
+        "maxLength": 10
       }
     },
-      "required": ["guid","code", "name", "unit","commodity", "traceableItem" ]
+      "required": ["guid","code", "name", "unit","commodity", "traceableItem", "archive", "dateOutputArchive" ]
     }
 

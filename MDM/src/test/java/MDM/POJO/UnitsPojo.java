@@ -12,6 +12,8 @@ public class UnitsPojo {
     private String nameFull;
     private  String code;
     private  String internationalReduction;
+    private boolean archive;
+    private String dateOutputArchive;
 
 
     public UnitsPojo() {
@@ -24,13 +26,17 @@ public class UnitsPojo {
             @JsonProperty(value ="name", required = true) String name,
             @JsonProperty(value ="nameFull", required = true) String nameFull,
             @JsonProperty(value ="code", required = true) String code,
-            @JsonProperty (value ="internationalReduction", required = true) String internationalReduction)
+            @JsonProperty (value ="internationalReduction", required = true) String internationalReduction,
+            @JsonProperty (value ="archive", required = true) boolean archive,
+            @JsonProperty (value ="dateOutputArchive", required = true) String dateOutputArchive)
     {
         this.guid = guid;
         this.name = name;
         this.nameFull = nameFull;
         this.code = code;
         this.internationalReduction = internationalReduction;
+        this.archive = archive;
+        this.dateOutputArchive = dateOutputArchive;
     }
 
     public String getGuid() {
@@ -69,7 +75,24 @@ public class UnitsPojo {
         return internationalReduction;
     }
 
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public void setArchive(boolean archive) {
+        this.archive = archive;
+    }
+
+    public String getDateOutputArchive() {
+        return dateOutputArchive;
+    }
+
+    public void setDateOutputArchive(String dateOutputArchive) {
+        this.dateOutputArchive = dateOutputArchive;
+    }
+
     public void setInternationalReduction(String internationalReduction) {
         this.internationalReduction = internationalReduction;
+
     }
 }

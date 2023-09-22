@@ -43,6 +43,7 @@ public class ClassifireIsAllRussian {
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 12));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
+        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
         Assertions.assertNotNull(response);
         deleteSpec();
     }
@@ -419,12 +420,16 @@ public class ClassifireIsAllRussian {
                         .body("guid", notNullValue())
                         .body("name", notNullValue())
                         .body("code", not(emptyOrNullString()))
+                        .body("archive", notNullValue())
+                        .body("dateOutputArchive", lessThanOrEqualTo(10))
                         .extract().response();
 
         JsonPath jsonPath = response.jsonPath();
         List<String> guid = jsonPath.get("guid");
         List<String> name = jsonPath.get("name");
         List<String> code = jsonPath.get("code");
+        List<String> archive = jsonPath.get("archive");
+        List<String> dateOutputArchive = jsonPath.get("dateOutputArchive");
 
         for (String s : guid) {
             Assert.assertFalse(s.isEmpty());
@@ -432,6 +437,8 @@ public class ClassifireIsAllRussian {
         }
         Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150));
         Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8));
+        Assert.assertNotNull(archive);
+        Assert.assertTrue(dateOutputArchive.stream().allMatch(x->x.length() <=10));
         deleteSpec();
     }
 
@@ -813,6 +820,7 @@ public class ClassifireIsAllRussian {
         response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 10));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
         response.forEach(x -> Assert.assertEquals(x.getUnit().length(), 36));
+        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
         Assertions.assertNotNull(response);
         deleteSpec();
     }
