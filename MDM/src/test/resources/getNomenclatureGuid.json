@@ -105,7 +105,7 @@
         "Прочая"
       ]
     },
-    "unifiedСlassifier": {
+    "unifiedClassifier": {
       "type": "string",
       "minLength": 36,
       "maxLength": 36
@@ -362,7 +362,7 @@
     "sortament",
     "sortamentGOST",
     "seriality",
-    "unifiedСlassifier",
+    "unifiedClassifier",
     "codeUC",
     "classifierEOP",
     "codeEOP",

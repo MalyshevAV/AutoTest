@@ -61,10 +61,16 @@
       "maxLength": 500
     },
     "baseUnit": {
-      "type": "integer",
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "baseUnitCode": {
+      "type": "string",
       "minLength": 0,
       "maxLength": 4
     },
+
     "drawingDenotation": {
       "type": ["string", "null"],
       "minLength": 0,
@@ -99,7 +105,7 @@
         "Прочая"
       ]
     },
-    "unifiedСlassifier": {
+    "unifiedClassifier": {
       "type": "string",
       "minLength": 36,
       "maxLength": 36
@@ -135,19 +141,19 @@
       "type": ["boolean","null"]
     },
     "tnved": {
-      "type": "integer",
-      "minLength": 0,
-      "maxLength": 50
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
     },
     "okved": {
-      "type": "string",
-      "minLength": 0,
-      "maxLength": 7
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
     },
     "okpd2": {
-      "type": "string",
-      "minLength": 0,
-      "maxLength": 12
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
     },
     "height": {
       "type": ["number", "null"],
@@ -167,7 +173,12 @@
       "maxLength": 30
     },
     "dimensionsUnit": {
-      "type": ["integer", "null"],
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "dimensionsUnitCode": {
+      "type": "integer",
       "minLength": 0,
       "maxLength": 4
     },
@@ -177,7 +188,12 @@
       "maxLength": 30
     },
     "weightUnit": {
-      "type": ["integer", "null"],
+      "type": ["string", "null"],
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "weightUnitCode": {
+      "type": "integer",
       "minLength": 0,
       "maxLength": 4
     },
@@ -220,9 +236,9 @@
               "maxLength": 150
             },
             "unit": {
-              "type": "integer",
-              "minLength": 0,
-              "maxLength": 4
+              "type": "string",
+              "minLength": 36,
+              "maxLength": 36
             }
           },
           "required": [
@@ -241,9 +257,9 @@
           "type": "object",
           "properties": {
             "unit": {
-              "type": "integer",
-              "minLength": 0,
-              "maxLength": 4
+              "type": "string",
+              "minLength": 36,
+              "maxLength": 36
             },
             "conversionFactor": {
               "type": "number",
@@ -338,13 +354,15 @@
     "ownershipSign",
     "analyticsPurchasable",
     "baseUnit",
+    "baseUnitCode",
+    "dimensionsUnitCode",
     "drawingDenotation",
     "material",
     "materialGOST",
     "sortament",
     "sortamentGOST",
     "seriality",
-    "unifiedСlassifier",
+    "unifiedClassifier",
     "codeUC",
     "classifierEOP",
     "codeEOP",
@@ -360,8 +378,10 @@
     "width",
     "length",
     "dimensionsUnit",
+    "weightUnitCode ",
     "weight",
     "weightUnit",
+    "weightUnitCode",
     "service",
     "electronicCatalog",
     "image",

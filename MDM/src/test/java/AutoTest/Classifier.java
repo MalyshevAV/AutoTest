@@ -1043,7 +1043,7 @@ public class Classifier {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .get("units/3107dadb-fd6a-11df-ad89-001cc40d947c")
+                .get("units/8c496b15-23e3-11ee-b5ac-005056013b0c")
                 .then().log().all()
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getUnitsGuid.json"));

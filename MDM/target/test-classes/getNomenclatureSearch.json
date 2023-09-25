@@ -9,7 +9,12 @@
         "minLength": 36,
         "maxLength": 36
       },
-      "be": {
+      "code": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 10
+      },
+      "unifiedClassifier": {
         "type": [
           "string",
           "null"
@@ -17,25 +22,6 @@
         "minLength": 36,
         "maxLength": 36
       },
-      "сode": {
-        "type": "string",
-        "minLength": 0,
-        "maxLength": 9
-      },
-      "unifiedСlassifier": {
-        "type": [
-          "string",
-          "null"
-        ],
-        "minLength": 36,
-        "maxLength": 36
-      },
-      "codeEOP": {
-        "type": "string",
-        "minLength": 0,
-        "maxLength": 150
-      },
-
       "name": {
         "type": "string",
         "minLength": 0,
@@ -112,10 +98,8 @@
     },
     "required": [
       "guid",
-      "be",
       "code",
-      "unifiedСlassifier",
-      "codeEOP",
+      "unifiedClassifier",
       "name",
       "fullName",
       "drawingDenotation",

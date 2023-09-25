@@ -21,6 +21,10 @@ public class Specifications {
                 .setAccept(ContentType.JSON)
                 .build();
     }
+
+
+
+
     public static ResponseSpecification responseSpecification() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)

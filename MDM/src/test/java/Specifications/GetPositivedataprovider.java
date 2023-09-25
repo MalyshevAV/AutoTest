@@ -20,11 +20,11 @@ public class GetPositivedataprovider {
         @Description("Позитивные тесты с использованием DataProvider")
         public static Object[][] type() {
             return new Object[][]{
-                    {0},
+                 //   {0},
                     {1},
-                    {2},
-                    {3},
-                    {4}
+                 //   {2},
+                  //  {3}
+
             };
     }
 

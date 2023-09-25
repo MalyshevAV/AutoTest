@@ -32,7 +32,7 @@ public class Nomenclature {
         };
     }
         @DataProvider
-        public static Object[][] guid() {
+        public static Object[][] guidNegative() {
             return new Object[][]{
 
                     {"13513a3e-36d6-11ee-b5b0-005026013b0c1"},
@@ -66,7 +66,7 @@ public class Nomenclature {
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"));
         deleteSpec();
     }
-    @Test(dataProvider = "guid")
+    @Test(dataProvider = "guidNegative")
     @Description("Получение базовой услуги по Гуид, негативные тесты")
     public void getBasicServicesGuidDataProvider(Object guid) {
         installSpec(requestSpecification(), responseSpecification400());
@@ -78,6 +78,20 @@ public class Nomenclature {
         deleteSpec();
         System.out.println("Значение Гуид: " + guid);
     }
+
+    @Test
+    @Description("Получение базовой услуги по Гуид, негативные тесты проверкаДата провайдер")
+    public void getBasicServicesGuidDataProviderMaxMinus() {
+        installSpec(requestSpecification(), responseSpecification400());
+        given()
+                .when()
+                .get("basic-services/2.147483647")
+                .then().log().all();
+        deleteSpec();
+    }
+
+
+
 ////////////////////////////////////////////"Получение номенклатуры по Гуид////////////////////////////////////////
     @Test
     @Description("Получение номенклатуры по Гуид, валидация по схеме Json")
@@ -92,7 +106,7 @@ public class Nomenclature {
         deleteSpec();
     }
 
-    @Test(dataProvider = "guid")
+    @Test(dataProvider = "guidNegative")
     @Description("Получение нономенклатуры по Гуид, негативные тесты")
     public void getNomenclatureGuidDataProvider(Object guid) {
         installSpec(requestSpecification(), responseSpecification400());
@@ -118,29 +132,6 @@ public class Nomenclature {
 
 
 
-
-
-
-
-
-//    @Test
-//    @Description("Создаем заявку на добавление, изменение, удаление номенклатуры")
-//    // Using HashMap
-//    public void postNomenclatureBe() throws FileNotFoundException {
-//        Map<String, Object> jsonAsMap = new HashMap<>();
-//        jsonAsMap.put("firstName", "John");
-//        jsonAsMap.put("lastName", "Doe");
-//        given()
-//                .auth().basic("Administrator", "1234567809").and()
-//                .header("x-se-hash",  "cfcd208495d565ef66e7dff9f98764da")
-//                .body(jsonAsMap)
-//                .when()
-//                .post("nomenclature/937a6068-3d9b-11ee-918f-7824af8ab721")
-//                .then().log().all()
-//                .assertThat()
-//               // .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getBasicServicesGuid.json"))
-//                .statusCode(200);
-//   }
 
 
 //////////////////////////////////Поиск номенклатуры/////////////////////////////////////////////////////
@@ -234,10 +225,6 @@ public class Nomenclature {
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
-
-
-
-
 
     @Test
     @Description("Поиск номенклатуры, type = 4")

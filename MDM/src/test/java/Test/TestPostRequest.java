@@ -159,10 +159,11 @@ public class TestPostRequest {
                 .body(postNomenclature)
                 .when()
                 .post("nomenclature/")
-                .then().log().all();
-//                .assertThat()
-//                .body(notNullValue(), hasSize((36)));
+                .then().log().all()
+                .body("guid", hasLength((36)))
+                .body("result", equalTo("ok"));
     }
+
     @Test(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
     @Description("Создаем заявку минимальное значение в в атрибутах")
     public void postNomenclatureChangeRequestVinValue(int value) {
@@ -183,6 +184,7 @@ public class TestPostRequest {
         data.put("guid", "F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
         data.put("guidBE", "H9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
         data.put("be", "М");
+        data.put("unifiedClassifier", "8e7275eb-3049-11ee-b5ae-005056013b0c"); //проверить
         data.put("codeUC", "0");
         data.put("name", "Б");
         data.put("fullName", "Б");
@@ -202,10 +204,13 @@ public class TestPostRequest {
                 .body(postNomenclature)
                 .when()
                 .post("nomenclature/")
-                .then().log().all();
-//                .assertThat()
-//                .body(notNullValue(), hasSize((36)));
+                .then().log().all()
+                .assertThat()
+                .body("guid", hasLength((36)))
+                .body("result", equalTo("ok"));
     }
+
+
         @Test(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
         @Description("Создаем заявку c Максимальным значением в атрибутах")
         public void postNomenclatureChangeRequestMax(int value) {
@@ -226,7 +231,7 @@ public class TestPostRequest {
             data.put("guid", "F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
             data.put("guidBE", "H9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
             data.put("be", "8e7275eb-3049-11ee-b5ae-005056013b0c");
-            data.put("unifiedСlassifier", "8e7275eb-3049-11ee-b5ae-005056013b0c");
+            data.put("unifiedClassifier", "8e7275eb-3049-11ee-b5ae-005056013b0c");
             data.put("name", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012");
             data.put("fullName", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012 (Полное наименование))");
             data.put("drawingDenotation", "24379.1-2012");
@@ -245,11 +250,10 @@ public class TestPostRequest {
                     .body(postNomenclature)
                     .when()
                     .post("nomenclature/")
-                    .then().log().all();
-//                .assertThat()
-//                .body(notNullValue(), hasSize((36)));
-
-
+                    .then().log().all()
+                    .assertThat()
+                    .body("guid", hasLength((36)))
+                    .body("result", equalTo("ok"));
         }
 
 

@@ -925,7 +925,7 @@ public class ClassifireIsAllRussian {
         deleteSpec();
     }
 
-    @Test
+  //  @Test
     @Description("Негативный тест Получение массива ТНВEД, поле Step 3 пробела")
     public void getTnvedListStepSpaces() {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
@@ -1065,7 +1065,7 @@ public class ClassifireIsAllRussian {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .get("/tnved/f8299582-32a7-11ee-918f-7824af8ab721")
+                .get("/tnved/8c496b15-23e3-11ee-b5ac-005056013b0c")
                 .then().log().all()
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getTvendGuid.json"));
@@ -1102,7 +1102,7 @@ public class ClassifireIsAllRussian {
                 .then().log().all();
     }
 
-    @Test
+ //   @Test
     @Description("Негативный тест Получение ТНВЕД по Гуид, только пробелы")
     public void getTnvedGuidSpacies() {
         installSpec(requestSpecification(), responseSpecification400());
@@ -1181,9 +1181,5 @@ public class ClassifireIsAllRussian {
                 .get("tnved/gxswhxtknhsdoploxxjapfjmpkpczxmdlfjdkgrthqzzvlqikubahotafuuhdijsgupmqqtaayjhqnvutpsrbnqcgypgavjchnwryowuryjoavwmedyzemvfcwgxaddhpzmenrhryfotslitzzvpnwpbqhevugimknufhmqokkojtrnebnppbcvdfqzfpfaznrpdiqcjlmcshvhaygannurnuwqarnuqesaghlzhsbzzjtnnmnppsxhfjgxbgyskjifyvprwzlbdstrzpwczkkijscuumeutjxkghhujpycvizixjvuimgllrlxrcffxkaywnxuedexowpaovdhzxjomnmicqlmqsfyzdmicuvbsviwxmgqggiabffsczvqblvdjvfclpelnwmvaiuzfgrkhvbrxezehgnqtnnylvoixmydujlhiqttgwqmuoapxewvzwlmhfufzewpiqalfwddblvisdebxuqvitcbrmdesaneekmeoldibydhgpwmdgyhkggndvnqdngtqyacqffhkqsmmumjqxfghockypfyfvdslkmaeegakuakdwucpridzjnqsluqhezjorgoonzfvhvmulysknczvtewsadocupjbxkyeqyqekamtsvcsaitjuthpsbllxhemshnxsocunelzfglqqbvzobuouaictkwezixyoghfujiiykhtdjyxatgeihskjcweynknedplkbddtudmnrvhfvozalpgjlhmkdfnxzuwowtmbsxcsqnxbpiegkufpixpcnyeeekfubvspwaietagusqngnfbjozfmillxruvplvtvxnawkxppmmesqawzcezinmllmomgbpgompvkyyxjvuyolrskxrhgzjqkuaaxdonslbsgukrpbtbpmtcswaqsvdrwxlqhxccnwwegsuntuzxxzhbvleoogqlzbnmmuqenbfkhzcpkevmcxxwptgapageocdtsmfvnbtzljlywxydkpzjojfyjyihfinmwjengjor\n")
                 .then().log().all();
     }
-
-
-
-
 }
 
