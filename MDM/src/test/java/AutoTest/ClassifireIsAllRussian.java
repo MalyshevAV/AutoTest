@@ -419,6 +419,7 @@ public class ClassifireIsAllRussian {
                         .body("size()", is(200))
                         .body("guid", notNullValue())
                         .body("name", notNullValue())
+                        .body("fullName", notNullValue())
                         .body("code", not(emptyOrNullString()))
                         .body("archive", notNullValue())
                         .body("dateOutputArchive", lessThanOrEqualTo(10))
@@ -427,6 +428,7 @@ public class ClassifireIsAllRussian {
         JsonPath jsonPath = response.jsonPath();
         List<String> guid = jsonPath.get("guid");
         List<String> name = jsonPath.get("name");
+        List<String> fullName = jsonPath.get("fullName");
         List<String> code = jsonPath.get("code");
         List<String> archive = jsonPath.get("archive");
         List<String> dateOutputArchive = jsonPath.get("dateOutputArchive");
@@ -437,6 +439,7 @@ public class ClassifireIsAllRussian {
         }
         Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150));
         Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8));
+        Assert.assertTrue(fullName.stream().allMatch(x->x.length() <= 100));
         Assert.assertNotNull(archive);
         Assert.assertTrue(dateOutputArchive.stream().allMatch(x->x.length() <=10));
         deleteSpec();
@@ -819,6 +822,7 @@ public class ClassifireIsAllRussian {
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 10));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
+        response.forEach(x-> Assert.assertTrue(x.getFullName().length() <= 100));
         response.forEach(x -> Assert.assertEquals(x.getUnit().length(), 36));
         response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
         Assertions.assertNotNull(response);
@@ -834,7 +838,8 @@ public class ClassifireIsAllRussian {
                 .queryParam("step", 5)
                 .get("tnved")
                 .then().log().all()
-                .body("size()", is(5));
+                .body("size()", is(5))
+                .extract().body().jsonPath().getList(".", TnvdPojo.class);
         deleteSpec();
     }
 
@@ -847,7 +852,8 @@ public class ClassifireIsAllRussian {
                 .queryParam("step", 6)
                 .get("tnved")
                 .then().log().all()
-                .body("size()", is(6));
+                .body("size()", is(6))
+                .extract().body().jsonPath().getList(".", TnvdPojo.class);
         deleteSpec();
     }
 
@@ -860,7 +866,8 @@ public class ClassifireIsAllRussian {
                 .queryParam("step", 199)
                 .get("tnved")
                 .then().log().all()
-                .body("size()", is(199));
+                .body("size()", is(199))
+                .extract().body().jsonPath().getList(".", TnvdPojo.class);
         deleteSpec();
     }
 
@@ -873,7 +880,8 @@ public class ClassifireIsAllRussian {
                 .queryParam("step", 100)
                 .get("tnved")
                 .then().log().all()
-                .body("size()", is(100));
+                .body("size()", is(100))
+                .extract().body().jsonPath().getList(".", TnvdPojo.class);
         deleteSpec();
     }
 
@@ -885,7 +893,8 @@ public class ClassifireIsAllRussian {
                 .when()
                 .get("tnved")
                 .then().log().all()
-                .body("size()", is(lessThanOrEqualTo(200)));
+                .body("size()", is(lessThanOrEqualTo(200)))
+                .extract().body().jsonPath().getList(".", TnvdPojo.class);
         deleteSpec();
     }
 

@@ -7,6 +7,7 @@ public class TnvdPojo {
     private String guid;
     private String code;
     private String name;
+    private String fullName;
     private String unit;
     private boolean commodity;
     private boolean traceableItem;
@@ -22,6 +23,7 @@ public class TnvdPojo {
             @JsonProperty(value = "guid", required = true) String guid,
             @JsonProperty(value ="code", required = true) String code,
             @JsonProperty(value ="name", required = true) String name,
+            @JsonProperty(value ="name", required = true) String fullName,
             @JsonProperty(value ="unit", required = true) String unit,
             @JsonProperty(value ="commodity", required = true) boolean commodity,
             @JsonProperty (value ="traceableItem", required = true) boolean traceableItem,
@@ -32,6 +34,7 @@ public class TnvdPojo {
         this.guid = guid;
         this.code = code;
         this.name = name;
+        this.name = fullName;
         this.unit = unit;
         this.commodity = commodity;
         this.traceableItem = traceableItem;
@@ -61,6 +64,14 @@ public class TnvdPojo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getUnit() {
