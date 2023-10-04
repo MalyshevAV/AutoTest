@@ -129,7 +129,7 @@
               "minLength": 1,
               "maxLength": 150
             },
-            "fullName": {
+            "nameFull": {
               "type": "string",
               "minLength": 1,
               "maxLength": 255
@@ -482,7 +482,7 @@
             "referencePosition",
             "consolidatedRecord",
             "name",
-            "fullName",
+            "nameFull",
             "namePurchasing",
             "nameSale",
             "ownershipSign",

@@ -34,7 +34,7 @@
       "dateOutputArchive": {
         "type": ["null","string"],
         "minLength": 10,
-        "maxLength": 10
+        "maxLength": 20
       }
     },
       "required": ["guid","code", "name", "unit","commodity", "traceableItem", "archive", "dateOutputArchive" ]

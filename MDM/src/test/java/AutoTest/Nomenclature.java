@@ -150,21 +150,7 @@ public class Nomenclature {
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
-//    @Test(dataProvider = "test")
-//    @Description("Поиск номенклатуры, DataProvider")
-//    public void getNomenclatureSearchDataProvider(Object step, int type, String data) {
-//        installSpec(requestSpecification(), Specifications.responseSpecification());
-//        given()
-//                .when()
-//                .queryParam("step", step)
-//                .queryParam("type", type)
-//                .queryParam("data", data)
-//                .get("nomenclature/search")
-//                .then().log().all()
-//                .body("size()", is(step))
-//                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
-//        deleteSpec();
-//    }
+
     @Test
     @Description("Поиск номенклатуры, type = 1")
     public void getNomenclatureSearchType1() {

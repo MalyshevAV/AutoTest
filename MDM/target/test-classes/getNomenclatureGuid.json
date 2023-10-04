@@ -18,7 +18,7 @@
     "dateOutputArchive": {
       "type": ["string", "null"],
       "minLength": 0,
-      "maxLength": 15
+      "maxLength": 20
     },
     "obsolete": {
       "type": "boolean"
@@ -29,34 +29,34 @@
       "maxLength": 36
     },
     "consolidatedRecord": {
-      "type": "boolean"
+      "type": ["boolean", "null"]
     },
     "name": {
       "type": "string",
-      "minLength": 0,
+      "minLength": 1,
       "maxLength": 150
     },
-    "fullName": {
+    "nameFull": {
       "type": "string",
-      "minLength": 0,
+      "minLength": 1,
       "maxLength": 255
     },
     "namePurchasing": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 0,
       "maxLength": 500
     },
     "nameSale": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 0,
       "maxLength": 500
     },
     "ownershipSign": {
-      "type": "integer",
+      "type": ["integer", "null"],
       "enum": [0, 1]
     },
     "analyticsPurchasable": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 0,
       "maxLength": 500
     },
@@ -66,7 +66,7 @@
       "maxLength": 36
     },
     "baseUnitCode": {
-      "type": "string",
+      "type": "integer",
       "minLength": 0,
       "maxLength": 4
     },
@@ -87,46 +87,43 @@
       "maxLength": 255
     },
     "sortament": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 0,
       "maxLength": 255
     },
     "sortamentGOST": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 0,
       "maxLength": 255
     },
     "seriality": {
-      "type": "string",
+      "type": "integer",
       "enum": [
-        "Серийная",
-        "Новая",
-        "Разовая",
-        "Прочая"
+       1, 2, 3,4
       ]
     },
     "unifiedClassifier": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 36,
       "maxLength": 36
     },
     "codeUC": {
       "type": "string",
-      "minLength": 0,
+      "minLength": 1,
       "maxLength": 50
     },
     "classifierEOP": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 36,
       "maxLength": 36
     },
     "codeEOP": {
-      "type": "string",
+      "type": ["string", "null"],
       "minLength": 0,
       "maxLength": 50
     },
     "includedEOP": {
-      "type": "boolean"
+      "type": ["boolean", "null"]
     },
     "mainManufacturer": {
       "type": ["boolean","null"]
@@ -138,7 +135,9 @@
       "type": ["boolean","null"]
     },
     "groupCost": {
-      "type": ["boolean","null"]
+      "type": ["string","null"],
+      "minLength": 36,
+      "maxLength": 36
     },
     "tnved": {
       "type": ["string", "null"],
@@ -179,7 +178,7 @@
     },
     "dimensionsUnitCode": {
       "type": "integer",
-      "minLength": 0,
+      "minLength": 1,
       "maxLength": 4
     },
     "weight": {
@@ -194,22 +193,22 @@
     },
     "weightUnitCode": {
       "type": "integer",
-      "minLength": 0,
+      "minLength": 1,
       "maxLength": 4
     },
     "service": {
-      "type": "boolean"
+      "type": ["null","boolean"]
     },
     "electronicCatalog": {
-      "type": "boolean"
+      "type": ["null","boolean"]
     },
     "image": {
-      "type": "string",
+      "type": ["null","string"],
       "minLength": 0,
       "maxLength": 250
     },
     "comment": {
-      "type": "string",
+      "type": ["null","string"],
       "minLength": 0,
       "maxLength": 1024
     },
@@ -348,7 +347,7 @@
     "referencePosition",
     "consolidatedRecord",
     "name",
-    "fullName",
+    "nameFull",
     "namePurchasing",
     "nameSale",
     "ownershipSign",

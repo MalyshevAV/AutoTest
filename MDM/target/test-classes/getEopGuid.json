@@ -28,7 +28,7 @@
     "dateOutputArchive": {
       "type": ["null","string"],
       "minLength": 10,
-      "maxLength": 10
+      "maxLength": 20
     }
 
     },

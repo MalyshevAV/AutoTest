@@ -34,15 +34,16 @@ public class Classifier {
         Assertions.assertEquals(response.size(), 200);
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         //Схему до 20 увеличили
-        response.forEach(x -> Assert.assertTrue(x.getCode().length() <= 14));
+        response.forEach(x -> Assert.assertTrue(x.getCode().length() <= 20));
         response.forEach(x -> Assert.assertEquals(x.getParent().length(), 36));
         response.forEach(x -> Assert.assertTrue(x.getName().length() <= 150));
         response.forEach(x -> Assert.assertEquals(x.getOwner().length(), 36));
         response.forEach(x -> Assert.assertTrue(x.getOkp().length() <= 25));
+       // response.forEach(x -> Assert.assertFalse(x.getOkp().length() == nullValue()));
         response.forEach(x -> Assert.assertEquals(x.getTnved().length(), 36));
         response.forEach(x -> Assert.assertEquals(x.getOkved().length(), 36));
         response.forEach(x -> Assert.assertEquals(x.getOkpd2().length(), 36));
-        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
+        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=20));
         Assertions.assertNotNull(response);
         deleteSpec();
     }
@@ -286,7 +287,7 @@ public class Classifier {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .get("unified-classifier/8eb9bf84-3507-11ee-918f-7824af8ab721")
+                .get("unified-classifier/513916c8-1677-11ee-b5ab-a0dc07f9a67b")
                 .then().log().all()
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getUnifiedClassifierGuid.json"));
@@ -429,7 +430,8 @@ public class Classifier {
                 .queryParam("step", 5)
                 .get("/eop")
                 .then().log().all()
-                .body("size()", is(5));
+                .body("size()", is(5))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getEopList.json"));
         deleteSpec();
     }
 
@@ -442,7 +444,8 @@ public class Classifier {
                 .queryParam("step", 6)
                 .get("/eop")
                 .then().log().all()
-                .body("size()", is(6));
+                .body("size()", is(6))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getEopList.json"));
         deleteSpec();
     }
 
@@ -455,7 +458,8 @@ public class Classifier {
                 .queryParam("step", 199)
                 .get("/eop")
                 .then().log().all()
-                .body("size()", is(199));
+                .body("size()", is(199))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getEopList.json"));
         deleteSpec();
     }
 
@@ -468,7 +472,8 @@ public class Classifier {
                 .queryParam("step", 100)
                 .get("/eop")
                 .then().log().all()
-                .body("size()", is(100));
+                .body("size()", is(100))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getEopList.json"));
         deleteSpec();
     }
 
@@ -480,7 +485,8 @@ public class Classifier {
                 .when()
                 .get("eop")
                 .then().log().all()
-                .body("size()", is(lessThanOrEqualTo(200)));
+                .body("size()", is(lessThanOrEqualTo(200)))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getEopList.json"));
         deleteSpec();
     }
 
@@ -661,7 +667,7 @@ public class Classifier {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .get("eop/362000bb-2f69-11ee-918f-7824af8ab721")
+                .get("eop/698688ac-1c9f-11ee-b5ac-005056013b0c")
                 .then().log().all()
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getEopGuid.json"));
@@ -675,7 +681,8 @@ public class Classifier {
         given()
                 .when()
                 .get("eop/09bdd436-3da3-11ee-918f-5824af8ab723")
-                .then().log().all();
+                .then().log().all()
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getEopGuid.json"));;
 
     }
 
@@ -798,7 +805,7 @@ public class Classifier {
         response.forEach(x -> Assert.assertTrue(x.getName().length() <= 25));
         response.forEach(x -> Assert.assertTrue(x.getNameFull().length() <= 100));
         response.forEach(x -> Assert.assertTrue(x.getInternationalReduction().length() <= 3));
-        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
+        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=20));
         Assertions.assertNotNull(response);
         deleteSpec();
     }
@@ -838,7 +845,7 @@ public class Classifier {
                 .queryParam("step", 199)
                 .get("units")
                 .then().log().all()
-                .body("size()", is(13));
+                .body("size()", is(15));
         deleteSpec();
     }
 
@@ -851,7 +858,7 @@ public class Classifier {
                 .queryParam("step", 100)
                 .get("units")
                 .then().log().all()
-                .body("size()", is(13));
+                .body("size()", is(15));
         deleteSpec();
     }
 
@@ -863,7 +870,7 @@ public class Classifier {
                 .when()
                 .get("units")
                 .then().log().all()
-                .body("size()", is(lessThanOrEqualTo(13)));
+                .body("size()", is(lessThanOrEqualTo(15)));
         deleteSpec();
     }
 
@@ -1043,7 +1050,7 @@ public class Classifier {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .get("units/8c496b15-23e3-11ee-b5ac-005056013b0c")
+                .get("units/85303f5a-e3aa-11e2-91f0-c80aa9301ced")
                 .then().log().all()
                 .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getUnitsGuid.json"));

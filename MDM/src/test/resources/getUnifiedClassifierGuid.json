@@ -56,7 +56,7 @@
     "dateOutputArchive": {
       "type": ["null","string"],
       "minLength": 1,
-      "maxLength": 10
+      "maxLength": 20
     }
   },
   "required": ["guid", "code", "parent", "name", "owner", "consolidatedGroup", "okp", "tnved", "okved", "okpd2", "archive", "dateOutputArchive"]

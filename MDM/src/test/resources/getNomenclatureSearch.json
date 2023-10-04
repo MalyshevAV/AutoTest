@@ -27,7 +27,7 @@
         "minLength": 0,
         "maxLength": 150
       },
-      "fullName": {
+      "nameFull": {
         "type": "string",
         "minLength": 0,
         "maxLength": 255
@@ -35,7 +35,7 @@
       "drawingDenotation": {
         "type": ["string", "null"],
         "minLength": 0,
-        "maxLength": 155
+        "maxLength": 255
       },
       "ownershipSign": {
         "type": "integer",
@@ -43,7 +43,15 @@
       },
       "seriality": {
         "type": "integer",
-        "enum": [1,2,3,4,5]
+        "enum": [1,2,3,5]
+      },
+
+      "supplier": {
+        "type": [
+        "string",
+        "null"],
+        "minLength": 36,
+        "maxLength": 36
       },
       "baseUnit": {
         "type": "string",
@@ -101,10 +109,11 @@
       "code",
       "unifiedClassifier",
       "name",
-      "fullName",
+      "nameFull",
       "drawingDenotation",
       "ownershipSign",
       "seriality",
+      "supplier",
       "baseUnit",
       "height",
       "width",

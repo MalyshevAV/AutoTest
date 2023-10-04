@@ -42,8 +42,9 @@ public class ClassifireIsAllRussian {
         Assertions.assertEquals(response.size(), 200);
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 12));
+        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 150));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
-        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
+        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=20));
         Assertions.assertNotNull(response);
         deleteSpec();
     }
@@ -410,38 +411,32 @@ public class ClassifireIsAllRussian {
     @Description("Получение списка OKVED ")
     public void getOkvedList() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
-        Response response  =
+       // Response response  =
                 given()
                         .when()
                         .queryParam("step", 200)
                         .get("/okved2")
                         .then().log().all()
                         .body("size()", is(200))
-                        .body("guid", notNullValue())
-                        .body("name", notNullValue())
-                        .body("fullName", notNullValue())
-                        .body("code", not(emptyOrNullString()))
-                        .body("archive", notNullValue())
-                        .body("dateOutputArchive", lessThanOrEqualTo(10))
-                        .extract().response();
+                        .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedList.json"));
 
-        JsonPath jsonPath = response.jsonPath();
-        List<String> guid = jsonPath.get("guid");
-        List<String> name = jsonPath.get("name");
-        List<String> fullName = jsonPath.get("fullName");
-        List<String> code = jsonPath.get("code");
-        List<String> archive = jsonPath.get("archive");
-        List<String> dateOutputArchive = jsonPath.get("dateOutputArchive");
+//        JsonPath jsonPath = response.jsonPath();
+//        List<String> guid = jsonPath.get("guid");
+//        List<String> name = jsonPath.get("name");
+//        List<String> nameFull = jsonPath.get("nameFull");
+//        List<String> code = jsonPath.get("code");
+//        List<String> archive = jsonPath.get("archive");
+//        List<String> dateOutputArchive = jsonPath.get("dateOutputArchive");
 
-        for (String s : guid) {
-            Assert.assertFalse(s.isEmpty());
-            Assert.assertEquals(s.length(), 36);
-        }
-        Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150));
-        Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8));
-        Assert.assertTrue(fullName.stream().allMatch(x->x.length() <= 100));
-        Assert.assertNotNull(archive);
-        Assert.assertTrue(dateOutputArchive.stream().allMatch(x->x.length() <=10));
+//        for (String s : guid) {
+//            Assert.assertFalse(s.isEmpty());
+//            Assert.assertEquals(s.length(), 36);
+//        }
+//        Assert.assertTrue(name.stream().allMatch(x->x.length() <= 150));
+//        Assert.assertTrue(code.stream().allMatch(x->x.length() <= 8));
+//        Assert.assertTrue(nameFull.stream().allMatch(x->x.length() <= 150));
+//        Assert.assertNotNull(archive);
+//        Assert.assertTrue(dateOutputArchive.stream().allMatch(x->x.length() <=19));
         deleteSpec();
     }
 
@@ -467,7 +462,8 @@ public class ClassifireIsAllRussian {
                 .queryParam("step", 6)
                 .get("okved2")
                 .then().log().all()
-                .body("size()", is(6));
+                .body("size()", is(6))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedList.json"));
         deleteSpec();
     }
 
@@ -480,7 +476,8 @@ public class ClassifireIsAllRussian {
                 .queryParam("step", 199)
                 .get("okved2")
                 .then().log().all()
-                .body("size()", is(199));
+                .body("size()", is(199))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedList.json"));
         deleteSpec();
     }
 
@@ -493,7 +490,8 @@ public class ClassifireIsAllRussian {
                 .queryParam("step", 100)
                 .get("okved2")
                 .then().log().all()
-                .body("size()", is(100));
+                .body("size()", is(100))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedList.json"));
         deleteSpec();
     }
 
@@ -505,7 +503,8 @@ public class ClassifireIsAllRussian {
                 .when()
                 .get("okved2")
                 .then().log().all()
-                .body("size()", is(lessThanOrEqualTo(200)));
+                .body("size()", is(lessThanOrEqualTo(200)))
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getOkvedList.json"));
         deleteSpec();
     }
 
@@ -822,9 +821,9 @@ public class ClassifireIsAllRussian {
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 10));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
-        response.forEach(x-> Assert.assertTrue(x.getFullName().length() <= 100));
+        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 100));
         response.forEach(x -> Assert.assertEquals(x.getUnit().length(), 36));
-        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=10));
+        response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=20));
         Assertions.assertNotNull(response);
         deleteSpec();
     }

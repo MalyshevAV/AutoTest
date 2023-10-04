@@ -7,7 +7,7 @@ public class OkpdPojo {
     private String guid;
     private String code;
     private String name;
-    private String fullName;
+    private String nameFull;
     private boolean archive;
     private String dateOutputArchive;
 
@@ -22,14 +22,14 @@ public class OkpdPojo {
             @JsonProperty(value = "guid", required = true) String guid,
             @JsonProperty(value ="code", required = true) String code,
             @JsonProperty(value ="name", required = true) String name,
-            @JsonProperty(value ="name", required = true) String fullName,
+            @JsonProperty(value ="nameFull", required = true) String nameFull,
             @JsonProperty (value ="archive", required = true) boolean archive,
             @JsonProperty (value ="dateOutputArchive", required = true) String dateOutputArchive)
     {
         this.guid = guid;
         this.code = code;
         this.name = name;
-        this.name = fullName;
+        this.nameFull = nameFull;
         this.archive = archive;
         this.dateOutputArchive = dateOutputArchive;
     }
@@ -58,12 +58,12 @@ public class OkpdPojo {
         this.name = name;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getNameFull() {
+        return nameFull;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setNameFull(String nameFull) {
+        this.nameFull = nameFull;
     }
 
     public boolean isArchive() {

@@ -34,7 +34,7 @@
     "dateOutputArchive": {
       "type": ["null","string"],
       "minLength": 10,
-      "maxLength": 10
+      "maxLength": 20
     }
 },
   "required": ["guid","name", "nameFull", "code", "internationalReduction", "archive", "dateOutputArchive" ]

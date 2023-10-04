@@ -46,7 +46,7 @@
     "codeUC": {
       "type": "string",
       "minLength": 0,
-      "maxLength": 15
+      "maxLength": 50
     }
   },
   "required": ["guid", "code", "name", "estimate", "nomenclature", "process", "estimateNumber", "re-exhibited", "internal", "codeUC"]

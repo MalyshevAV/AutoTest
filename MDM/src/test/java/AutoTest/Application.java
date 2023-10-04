@@ -4,6 +4,7 @@ import Models.PojoPost;
 import Models.Responsible;
 import Specifications.Specifications;
 import io.qameta.allure.Description;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -14,6 +15,38 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class Application {
+
+
+    @Test
+    @Description("Получение номенклатуры по Гуид, валидация по схеме Json")
+    public void getChangeRequestGuid() {
+        installSpec(requestSpecification(), responseSpecification());
+        given()
+                .when()
+                .get("change-request/b396da63-61f7-11ee-b5b0-005056013b0c")
+                .then().log().all()
+                .assertThat()
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getChangeRequest.json"));
+        deleteSpec();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Test
     @Description("using POJO")
