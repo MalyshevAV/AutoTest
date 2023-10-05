@@ -121,7 +121,7 @@ public class TestPostRequest {
 
 
     @Test(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
-    @Description("Создаем заявку на добавление, изменение, удаление номенклатуры")
+    @Description("Создаем заявку на добавление, изменение, удаление номенклатуры c типом = 0, 1, 2")
     public void postNomenclatureChangeRequestMap(int value) {
         installSpec(requestSpecification(), responseSpecification());
         HashMap<String, Object> postNomenclature = new HashMap<>();
@@ -129,8 +129,9 @@ public class TestPostRequest {
         HashMap<String, Object> data = new HashMap<>();
 
         postNomenclature.put("type", value); // Параметризация значений с помощью Data Provider
-        postNomenclature.put("comment", "Комментарий");
+        postNomenclature.put("content", "Комментарий");
         postNomenclature.put("guid", "8e7275eb-3049-11ee-b5ae-005056013b0c");
+        postNomenclature.put("be", "8e7275eb-3049-11ee-b5ae-005056013b0c");
         postNomenclature.put("autor", autor);
         postNomenclature.put("data", data);
 
@@ -139,20 +140,19 @@ public class TestPostRequest {
 
         data.put("guid", "F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
         data.put("guidBE", "H9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
-        data.put("be", "МСФОКодБЕ");
-        data.put("codeUC", "01.02.01");
+        data.put("unifiedClassifier", "H9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
         data.put("name", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012");
-        data.put("fullName", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012 (Полное наименование))");
+        data.put("nameFull", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012 (Полное наименование))");
         data.put("drawingDenotation", "24379.1-2012");
         data.put("ownershipSign", 0);
         data.put("seriality", 1);
-        data.put("supplier", true);
-        data.put("baseUnit", 796);
-        data.put("height", "12,330");
-        data.put("width", "1,450");
-        data.put("length", "9,985");
+        data.put("supplier", "8e055502-9c46-4de7-80d4-1417ee678ab3");
+        data.put("baseUnit", "8e055502-9c46-4de7-80d4-1417ee678ab3");
+        data.put("height", "12.330");
+        data.put("width", "1.450");
+        data.put("length", "9.985");
         data.put("dimensionsUnit", 796);
-        data.put("weight", "1,500");
+        data.put("weight", "1.500");
         data.put("weightUnit", 796);
         given()
                 .header("x-se-hash", "cfcd208495d565ef66e7dff9f98764da")
