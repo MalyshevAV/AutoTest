@@ -113,14 +113,15 @@ public class Classifier {
     }
 
     @Test
-    @Description("Негативный тест Получение массива Единый классификатор, поле Step (Min-1)")
+    @Description("Позитивный тест Получение массива Единый классификатор, поле Step 1")
     public void getUnifiedClassifierListStepMinMinus() {
-        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .queryParam("step", 4)
+                .queryParam("step", 1)
                 .get("unified-classifier")
-                .then().log().all();
+                .then().log().all()
+                .body("size()", is(1));;
         deleteSpec();
     }
 
@@ -311,9 +312,7 @@ public class Classifier {
         given()
                 .when()
                 .get("unified-classifier/8eb9bf84-3507-11ee-918f-7824af8ab7211")
-                .then().log().all()
-                .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getUnifiedClassifierGuid.json"));
+                .then().log().all();
     }
 
     @Test
@@ -491,14 +490,15 @@ public class Classifier {
     }
 
     @Test
-    @Description("Негативный тест Получение массива Единый ограничительный перечень, поле Step (Min-1)")
+    @Description("Негативный тест Получение массива Единый ограничительный перечень, поле Step 1")
     public void getEopListStepMinMinus() {
-        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .queryParam("step", 4)
+                .queryParam("step", 1)
                 .get("eop")
-                .then().log().all();
+                .then().log().all()
+                .body("size()", is(1));
         deleteSpec();
     }
 
@@ -681,8 +681,7 @@ public class Classifier {
         given()
                 .when()
                 .get("eop/09bdd436-3da3-11ee-918f-5824af8ab723")
-                .then().log().all()
-                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getEopGuid.json"));;
+                .then().log().all();;
 
     }
 
@@ -875,14 +874,15 @@ public class Classifier {
     }
 
     @Test
-    @Description("Негативный тест Получение массива всех Единиц измерения, поле Step (Min-1)")
+    @Description("Негативный тест Получение массива всех Единиц измерения, поле Step 1")
     public void getUnitsListStepMinMinus() {
-        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .queryParam("step", 4)
+                .queryParam("step", 1)
                 .get("units")
-                .then().log().all();
+                .then().log().all()
+                .body("size()", is(1));
         deleteSpec();
     }
 

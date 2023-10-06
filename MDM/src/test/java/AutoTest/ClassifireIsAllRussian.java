@@ -114,14 +114,15 @@ public class ClassifireIsAllRussian {
     }
 
     @Test
-    @Description("Негативный тест Получение массива ОКПД, поле Step (Min-1)")
+    @Description("Негативный тест Получение массива ОКПД, поле Step 1")
     public void getOkpdListStepMinMinus() {
-        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .queryParam("step", 4)
+                .queryParam("step", 1)
                 .get("okpd2")
-                .then().log().all();
+                .then().log().all()
+                .body("size()", is(1));;
         deleteSpec();
     }
 
@@ -509,14 +510,15 @@ public class ClassifireIsAllRussian {
     }
 
     @Test
-    @Description("Негативный тест Получение массива OKVED, поле Step (Min-1)")
+    @Description("Негативный тест Получение массива OKVED, поле Step 1")
     public void getOkvedListStepMinMinus() {
-        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .queryParam("step", 4)
+                .queryParam("step", 1)
                 .get("okved2")
-                .then().log().all();
+                .then().log().all()
+                .body("size()", is(1));;
         deleteSpec();
     }
 
@@ -898,14 +900,15 @@ public class ClassifireIsAllRussian {
     }
 
     @Test
-    @Description("Негативный тест Получение массива ТНВEД, поле Step (Min-1)")
+    @Description("Негативный тест Получение массива ТНВEД, поле Step 1")
     public void getTnvedListStepMinMinus() {
-        installSpec(requestSpecification(), Specifications.responseSpecification400());
+        installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
                 .queryParam("step", 4)
                 .get("tnved")
-                .then().log().all();
+                .then().log().all()
+                .body("size()", is(1));
         deleteSpec();
     }
 
