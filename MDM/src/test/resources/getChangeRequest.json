@@ -203,17 +203,17 @@
           "minLength": 36,
           "maxLength": 36
         },
-        "TNVED": {
+        "tnved": {
           "type": ["null", "string"],
           "minLength": 36,
           "maxLength": 36
         },
-        "OKVED": {
+        "okved": {
           "type": ["null", "string"],
           "minLength": 36,
           "maxLength": 36
         },
-        "OKPD2": {
+        "okpd2": {
           "type": ["null", "string"],
           "minLength": 36,
           "maxLength": 36
@@ -428,9 +428,9 @@
         "includedEOP",
         "oneTimePurchase",
         "groupCost",
-        "TNVED",
-        "OKVED",
-        "OKPD2",
+        "tnved",
+        "okved",
+        "okpd2",
         "height",
         "width",
         "length",

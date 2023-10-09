@@ -125,12 +125,6 @@
     "includedEOP": {
       "type": ["boolean", "null"]
     },
-    "mainManufacturer": {
-      "type": ["boolean","null"]
-    },
-    "internalCooperation": {
-      "type": ["boolean","null"]
-    },
     "oneTimePurchase": {
       "type": ["boolean","null"]
     },
@@ -366,8 +360,6 @@
     "classifierEOP",
     "codeEOP",
     "includedEOP",
-    "mainManufacturer",
-    "internalCooperation",
     "oneTimePurchase",
     "groupCost",
     "tnved",
@@ -377,7 +369,6 @@
     "width",
     "length",
     "dimensionsUnit",
-    "weightUnitCode ",
     "weight",
     "weightUnit",
     "weightUnitCode",
