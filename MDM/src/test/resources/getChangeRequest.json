@@ -10,7 +10,7 @@
     "code": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 9
+      "maxLength": 10
     },
     "status": {
       "type": "integer",
