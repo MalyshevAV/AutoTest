@@ -28,7 +28,17 @@ public class Application {
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getChangeRequest.json"));
         deleteSpec();
     }
-
+    @Test
+    @Description("Получение заявки по Гуид на изменение Type = 5 , валидация по схеме Json")
+    public void getChangeRequestGuid5() {
+        installSpec(requestSpecification(), responseSpecification());
+        given()
+                .when()
+                .get("change-request/dd91b3fc-36d5-11ee-b5b0-005056013b0c")
+                .then().log().all()
+                .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getChangeRequest.json"));
+        deleteSpec();
+    }
 
     @Test (dataProvider = "guidNegative", dataProviderClass = Nomenclature.class)
     @Description("Негативные тесты Получение измеений по заявке по Гуид ")

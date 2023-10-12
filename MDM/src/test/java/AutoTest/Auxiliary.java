@@ -38,13 +38,17 @@ public class Auxiliary {
         @Description("Негативные тесты с использованием DataProvider")
         public static Object[][] dataNegative() {
             return new Object[][]{
-                    {"", 1},
+                    {"", 5},
+                    {"nomenclature", 0},
                     {"basic-services", 201},
-                    {"unified-classifier", 0},
-                    {"eop", -1},
+                    {"unified-classifier", 1.2},
+                    {"eop", Integer.MAX_VALUE},
                     {"units", Double.MAX_VALUE},
-                    {"okpd2", Integer.MAX_VALUE},
-                    {"okved2", "123string"},
+                    {"okpd2", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupta"},
+                    {"", 5},
+                    {"eop", "!@#$%^&*(){}[]\"':;/<>\\|№\n"},
+                    {"eop", "select*from users"},
+                    {"units", -100},
                     {"tnved", "<script>alert( 'Hello world' );</script>"}
             };
     }
