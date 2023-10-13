@@ -510,7 +510,7 @@ public class ClassifireIsAllRussian {
     }
 
     @Test
-    @Description("Негативный тест Получение массива OKVED, поле Step 1")
+    @Description("Получение массива OKVED, поле Step 1")
     public void getOkvedListStepMinMinus() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
@@ -900,12 +900,12 @@ public class ClassifireIsAllRussian {
     }
 
     @Test
-    @Description("Негативный тест Получение массива ТНВEД, поле Step 1")
-    public void getTnvedListStepMinMinus() {
+    @Description("Получение массива ТНВEД, поле Step 1")
+    public void getTnvedListStepMin() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .queryParam("step", 4)
+                .queryParam("step", 1)
                 .get("tnved")
                 .then().log().all()
                 .body("size()", is(1));
