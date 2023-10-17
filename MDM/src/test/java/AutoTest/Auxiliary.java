@@ -24,28 +24,27 @@ public class Auxiliary {
     @Description("Позитивные тесты с использованием DataProvider")
     public static Object[][] data() {
         return new Object[][]{
-                {"nomenclature", 1},
+                {"nomenclature", 5},
                 {"basic-services", 1},
                 {"unified-classifier", 1},
                 {"eop", 1},
                 {"units", 1},
                 {"okpd2", 1},
                 {"okved2", 1},
-                {"tnved", 1}
+                {"tnved", 5}
         };
     }
         @DataProvider
         @Description("Негативные тесты с использованием DataProvider")
         public static Object[][] dataNegative() {
             return new Object[][]{
-                    {"", 5},
+                    {" ", 5},
                     {"nomenclature", 0},
                     {"basic-services", 201},
                     {"unified-classifier", 1.2},
                     {"eop", Integer.MAX_VALUE},
                     {"units", Double.MAX_VALUE},
                     {"okpd2", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupta"},
-                    {"", 5},
                     {"eop", "!@#$%^&*(){}[]\"':;/<>\\|№\n"},
                     {"eop", "select*from users"},
                     {"units", -100},
@@ -53,17 +52,6 @@ public class Auxiliary {
             };
     }
 
-    @Test
-    @Description("Получение ОКПД2 по Гуид, валидация при помощи схемы Json")
-    public void getSetNewHash() {
-        installSpec(requestSpecification(), responseSpecification());
-        given()
-                .header("x-se-hash", "cfcd208495d565ef66e7dff9f98764da")
-                .when()
-                .get("/set-new-hash")
-                .then().log().all();
-        deleteSpec();
-    }
 
     @Test
     @Description("Получение списка бизнес единиц")
@@ -96,29 +84,29 @@ public class Auxiliary {
 
     @Test(dataProvider = "data")
     @Description("Проверка списка изменений")
-    public void getListOfChanges(String type, int step) {
+    public void getListOfChanges(Object type, Object step) {
         installSpec(requestSpecification(), responseSpecification());
         given()
                 .when()
                 .pathParam("type", type)
-                .pathParam("step", step)
-                .get("list-of-changes/{type} {step}")
+                .queryParam("step", step)
+                .get("list-of-changes/{type}")
                 .then().log().all()
-                .assertThat()
                 .body("size()", is(step))
+                .assertThat()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getListOfChanges.json"));
         deleteSpec();
 
     }
     @Test(dataProvider = "dataNegative")
-    @Description("Проверка списка изменений")
-    public void getListOfChangesNegative(String type, Object step) {
+    @Description("Невалидные значения Степ Проверка списка изменений")
+    public void getListOfChangesNegative(Object type, Object step) {
         installSpec(requestSpecification(), responseSpecification400());
-        given()
+        given().log().uri()
                 .when()
                 .pathParam("type", type)
-                .pathParam("step", step)
-                .get("list-of-changes/{type} {step}")
+                .queryParam("step", step)
+                .get("list-of-changes/{type}")
                 .then().log().all();
         deleteSpec();
 

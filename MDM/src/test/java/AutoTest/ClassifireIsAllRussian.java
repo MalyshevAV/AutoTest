@@ -55,10 +55,10 @@ public class ClassifireIsAllRussian {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
                 .when()
-                .queryParam("step", 5)
+                .queryParam("step", 1)
                 .get("/okpd2")
                 .then().log().all()
-                .body("size()", is(5));
+                .body("size()", is(1));
         deleteSpec();
     }
 

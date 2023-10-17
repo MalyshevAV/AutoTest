@@ -3,7 +3,7 @@
   "type": "array",
   "items": [
     {
-      "type": "string",
+      "type": "object",
       "minLength": 36,
       "maxLength": 36
     }

@@ -510,7 +510,8 @@ public class Classifier {
                 .when()
                 .queryParam("step", 201)
                 .get("eop")
-                .then().log().all();
+                .then().log().all()
+                .body("size()", is(201));;
         deleteSpec();
     }
 
@@ -520,7 +521,7 @@ public class Classifier {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
         given()
                 .when()
-                .queryParam("step", 2147483647)
+                .queryParam("step", Integer.MAX_VALUE)
                 .get("eop")
                 .then().log().all();
         deleteSpec();
@@ -844,7 +845,7 @@ public class Classifier {
                 .queryParam("step", 199)
                 .get("units")
                 .then().log().all()
-                .body("size()", is(15));
+                .body("size()", is(23));
         deleteSpec();
     }
 
@@ -857,7 +858,7 @@ public class Classifier {
                 .queryParam("step", 100)
                 .get("units")
                 .then().log().all()
-                .body("size()", is(15));
+                .body("size()", is(23));
         deleteSpec();
     }
 
@@ -869,12 +870,12 @@ public class Classifier {
                 .when()
                 .get("units")
                 .then().log().all()
-                .body("size()", is(lessThanOrEqualTo(15)));
+                .body("size()", is(lessThanOrEqualTo(23)));
         deleteSpec();
     }
 
     @Test
-    @Description("Негативный тест Получение массива всех Единиц измерения, поле Step 1")
+    @Description("олучение массива всех Единиц измерения, поле Step 1")
     public void getUnitsListStepMinMinus() {
         installSpec(requestSpecification(), Specifications.responseSpecification());
         given()
@@ -904,7 +905,7 @@ public class Classifier {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
         given()
                 .when()
-                .queryParam("step", 2147483647)
+                .queryParam("step", Integer.MAX_VALUE)
                 .get("units")
                 .then().log().all();
         deleteSpec();

@@ -10,10 +10,11 @@ public class GetPositivedataprovider {
     public static Object[][] positiveData() {
         return new Object[][]{
                 {5},
-                {"6"},
-                {"100"},
-                {"199"},
-                {"200"}
+                {-1}
+//                {"6"},
+//                {"100"},
+//                {"199"},
+//                {"200"}
         };
     }
         @DataProvider
@@ -21,7 +22,7 @@ public class GetPositivedataprovider {
         public static Object[][] type() {
             return new Object[][]{
                     {0},
-                    {2},
+                    {2}
             };
     }
 

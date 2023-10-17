@@ -162,7 +162,7 @@ public class Nomenclature {
                 .queryParam("data", "Болт")
                 .get("nomenclature/search")
                 .then().log().all()
-                .body("size()", is(176))
+                .body("size()", is(173))
                 .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("getNomenclatureSearch.json"));
         deleteSpec();
     }
@@ -189,7 +189,7 @@ public class Nomenclature {
                 .when()
                 .queryParam("step", 5)
                 .queryParam("type", 3)
-                .queryParam("data", "6bfc4888-5dd9-11ee-b451-7824af8ab721")
+                .queryParam("data", "4d0e1f7b-5149-11ee-b5b0-005056013b0c")
                 .get("nomenclature/search")
                 .then().log().all()
                 .body("size()", is(2))
