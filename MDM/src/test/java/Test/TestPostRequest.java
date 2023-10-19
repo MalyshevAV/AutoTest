@@ -97,7 +97,7 @@ public class TestPostRequest {
         autor.put("fio", "Иванов Иван Иванович");
         autor.put("email", "ivanov@yandex.ru");
 
-        data.put("guid", "49122bef-36d6-11ee-b5b0-005056013b0c");
+        data.put("guid", "dd91b3fc-36d5-11ee-b5b0-005056013b0c");
         data.put("guidBE", "8e7275eb-3049-11ee-b5ae-005056013b0c");
         data.put("unifiedClassifier", "6c7ac4b5-67fd-11ee-b5b0-005056013b0c");
         data.put("name", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012");
@@ -216,7 +216,7 @@ public class TestPostRequest {
         autor.put("fio", "Иванов Иван Иванович");
         autor.put("email", "ivanov@yandex.ru");
 
-        data.put("guid", "49122bef-36d6-11ee-b5b0-005056013b0c");
+        data.put("guid", "dd91b3d6-36d5-11ee-b5b0-005056013b0c");
         data.put("guidBE", "8e7275eb-3049-11ee-b5ae-005056013b0c");
         data.put("unifiedClassifier", "6c7ac4b5-67fd-11ee-b5b0-005056013b0c");
         data.put("name", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012");
@@ -303,7 +303,7 @@ public class TestPostRequest {
 
     @Test(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
     @Description("Создаем заявку минимальное значение в в атрибутах Тип = 0 2")
-    public void postNomenclatureChangeRequestМinValue(int type) {
+    public void postNomenclatureChangeRequestMinValue(int type) {
         installSpec(requestSpecification(), responseSpecification());
         HashMap<String, Object> postNomenclature = new HashMap<>();
         HashMap<String, Object> autor = new HashMap<>();
@@ -318,7 +318,7 @@ public class TestPostRequest {
         autor.put("fio", "И");
         autor.put("email", "i");
 
-        data.put("guid", uuid);
+        data.put("guid", "dd91abac-36d5-11ee-b5b0-005056013b0c");
         data.put("guidBE", "8e7275eb-3049-11ee-b5ae-005056013b0c");
         data.put("unifiedClassifier", "6c7ac4b5-67fd-11ee-b5b0-005056013b0c");
         data.put("name", "Б");
@@ -434,7 +434,7 @@ public class TestPostRequest {
         postNomenclature.put("data", data);
 
         autor.put("fio", "йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()");
-        autor.put("email", "йцу кен гшщ зхъ фва про лдж эя");
+        autor.put("email", "7bQPCJrLjGPsIbnPhp9TI1mwUbEFwtcPSsSkDZ1WKJCh86bujE");
 
         data.put("guid", uuid);
         data.put("guidBE", "8e7275eb-3049-11ee-b5ae-005056013b0c");
@@ -446,11 +446,11 @@ public class TestPostRequest {
         data.put("seriality", 1);  // 1 2 3 4 5
         data.put("supplier", "8e055502-9c46-4de7-80d4-1417ee678ab3");
         data.put("baseUnit", "77b6212f-fd66-11df-ad89-001cc40d947c");
-        data.put("height", 1.0);
-        data.put("width", 1.0);
-        data.put("length", 1.0);
+        data.put("height", 1);
+        data.put("width", 1);
+        data.put("length", 1);
         data.put("dimensionsUnit", uuid);
-        data.put("weight", 1.0);
+        data.put("weight", 1);
         data.put("weightUnit", uuid);
 
         given()
@@ -557,7 +557,7 @@ public class TestPostRequest {
         postNomenclature.put("data", data);
 
         autor.put("fio", "sйцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()");
-        autor.put("email", "sйцу кен гшщ зхъ фва про лдж эя");
+        autor.put("email", "7bQPCJrLjGPsIbnPhp9TI1mwUbEFwtcPSsSkDZ1WKJCh86bujE");
 
         data.put("guid", uuid);
         data.put("guidBE", "8e7275eb-3049-11ee-b5ae-005056013b0c");
@@ -595,15 +595,15 @@ public class TestPostRequest {
         HashMap<String, Object> data = new HashMap<>();
 
         postNomenclature.put("type", 1); // Параметризация значений с помощью Data Provider
-        postNomenclature.put("comment", "цу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()_+/, § $&= @#«» <>~®-;²³ йцу кен гшщ зхъ фва про л");
+        postNomenclature.put("comment", "1zE19lr19NyMCUvmXNGZpFj3FXbgut0cbGgE7uaVeEWI1Dh4W8nB7UExgvhUUMoiW0yCvLQYr4Ou31APCkTR4q0IuOv9IX8F0qcewjeipMxagDTGo4fVQSyGaGYw3WSbqbEv0m4myCTk5d0DFbnO1GJHgkWKYoja7DjFiETUs4PDXkgwhcvLRlg14pZvIfZg705gSKih9T4FNBhyggjU5o31T7ZxPx831ssoEOTd6k0NWiG0hiKQk2ssxTc8lg7udvYqqOjyytqYKjZhdoE3pPG66oNK486c2vcs0U6v5Popil7fFEvJFmizf4aUI5nvVe1Vqypwv16wdHVPlNXeHhzI8ICWcIrcHQq4tDrWPyhYKWo8YudpTl6eWOJdhPYlkxpKV9mwTf0FitH0LTuPagzT3nHpSod0bMHhgUvtkiYZ4ik1LqkhY4YGVhI6sTp0fQX8GJhHfyL40zFJz9JRPF0V7hWNOhKyXN112ItdihtadhSgT4cLKJLbcfecBCR2fjYsdsIdtugg6kIWQUpClJ9pfnjhxZcRwRoPlcewmi1OHzXvFf44VTeMJl80xC0OfZpH9IpcARWLKj1o37BOTfPIIEYVxvPqomBbCa85M7b9ePedUbQJK1mWPqM0nkpJkYYm9UqRv75clsQzRMQW0uKFHBxo4elt2yAIZ51am3ywFByqrguD22exB44CsLHSwcnBaEB4frYBWNIha7SoDrBHqvOMhuqOXwvT3gurK7jLg7Bnn1ZSyWYPMYQiRBPWPgyHLzoM2qyIcnYS57Kp9cKlzCd06UAirzx5oS5B7NWxT5eNYl2OzudVneVp4hS3X2VkMpwXkzAXd3LJatd3dZzgCxJHUafOHSMAMhWCSFxZJihzXDY8fLuQMZlvlAnEX1SIlK0lSSIaUQzvLLcGADfsDf6aNsMwnV7WEC7B3VJLB2wWyLhZENvpp0UL9dckyZMh8ajGlxlpS3DTkU6diIYgDBVrnkbOpUvmFgqfGBmY73YJ5AA78HTOeVIMw9NjW");
         postNomenclature.put("guid", uuid);
         postNomenclature.put("autor", autor);
         postNomenclature.put("data", data);
 
-        autor.put("fio", "йцу кен гшщ зхъ фва про лдж эяч сми тьб юёъ ЙЦУ КЕН ГШЩ ЗХЪ ФВА ПРО ЛДЖ ЭЯЧ СМИ ТЬБ ЮЁЪ !“№ ;%: ?*()");
-        autor.put("email", "йцу кен гшщ зхъ фва про лдж эя");
+        autor.put("fio", "1xYc6oKUDgihYpgtq5DXjwg7JIivnjYJO8mRS3fFOONJqhIhjQGEVyTNYaEr0oZaDDYIQUUOewca3RAGr5lsPpvWJoQADl4QwDjYX");
+        autor.put("email", "7bQPCJrLjGPsIbnPhp9TI1mwUbEFwtcPSsSkDZ1WKJCh86bujE");
 
-        //data.put("guid", "49122bef-36d6-11ee-b5b0-005056013b0c");
+        data.put("guid", "49122bef-36d6-11ee-b5b0-005056013b0c");
         data.put("guidBE", "8e7275eb-3049-11ee-b5ae-005056013b0c");
         data.put("unifiedClassifier", "6c7ac4b5-67fd-11ee-b5b0-005056013b0c");
         data.put("name", "wpq1F9jzlyqGGUXDF2JTYY9D2a0uJXxEaBtH32Jvk5xi8uecvRZ085O02VdjJszbr86yWBiHxiQ2WwB7ymdrtoAcrqcIddm2PatDEJ1eh822McYodW3jnQhwSp51RU04oGIJq5KrrbfbpUpmnln3UX");
@@ -670,22 +670,22 @@ public class TestPostRequest {
 
         postNomenclature.put("type", type); // Параметризация значений с помощью Data Provider
         postNomenclature.put("content", "");
-        postNomenclature.put("guid", "");
-        postNomenclature.put("be", "");
+        postNomenclature.put("guid", uuid);
+        postNomenclature.put("be", uuid);
         postNomenclature.put("autor", autor);
         postNomenclature.put("data", data);
 
         autor.put("fio", "");
         autor.put("email", "");
 
-        data.put("guid", "");
-        data.put("guidBE", "");
-        data.put("unifiedClassifier", "");
+        data.put("guid", uuid);
+        data.put("guidBE", uuid);
+        data.put("unifiedClassifier", uuid);
         data.put("name", "");
         data.put("nameFull", "");
         data.put("ownershipSign", 1); // 0 - Покупная, 1 - собственная
         data.put("seriality", 0);  // 1 2 3 4 5
-        data.put("baseUnit", "");
+        data.put("baseUnit", uuid);
 
         given()
                 .body(postNomenclature)
@@ -704,22 +704,22 @@ public class TestPostRequest {
 
         postNomenclature.put("type", 1); // Параметризация значений с помощью Data Provider
         postNomenclature.put("content", "");
-        postNomenclature.put("guid", "");
-        postNomenclature.put("be", "");
+        postNomenclature.put("guid", uuid);
+        postNomenclature.put("be", uuid);
         postNomenclature.put("autor", autor);
         postNomenclature.put("data", data);
 
         autor.put("fio", "");
         autor.put("email", "");
 
-        data.put("guid", "");
-        data.put("guidBE", "");
-        data.put("unifiedClassifier", "");
+        data.put("guid", uuid);
+        data.put("guidBE", uuid);
+        data.put("unifiedClassifier", uuid);
         data.put("name", "");
         data.put("nameFull", "");
         data.put("ownershipSign", 1); // 0 - Покупная, 1 - собственная
         data.put("seriality", 1);  // 1 2 3 4 5
-        data.put("baseUnit", "");
+        data.put("baseUnit", uuid);
 
         given()
                 .body(postNomenclature)
@@ -741,19 +741,18 @@ public class TestPostRequest {
 
         postNomenclature.put("type", 3); // Параметризация значений с помощью Data Provider
         postNomenclature.put("content", "");
-        postNomenclature.put("guid","" );
-        postNomenclature.put("be", "");
+        postNomenclature.put("guid",uuid );
+        postNomenclature.put("be", uuid);
         postNomenclature.put("autor", autor);
         postNomenclature.put("data", data);
 
         autor.put("fio", "");
         autor.put("email", "");
 
-        data.put("guid", "");
-        data.put("guidBE", "");
-        data.put("be", "");
+        data.put("guid", uuid);
+        data.put("guidBE", uuid);
+        data.put("be", uuid);
         given()
-                // .header("x-se-hash", "cfcd208495d565ef66e7dff9f98764da")
                 .body(postNomenclature)
                 .when()
                 .post("nomenclature/")
@@ -899,7 +898,7 @@ public class TestPostRequest {
         autor.put("fio", "Иванов Иван Иванович");
         autor.put("email", "ivanov@yandex.ru");
 
-        data.put("guid", "49122bef-36d6-11ee-b5b0-005056013b0c");
+        data.put("guid", uuid); //  для типа 2 нужен гуид номенклатуры который мы изменяем
         data.put("guidBE", "8e7275eb-3049-11ee-b5ae-005056013b0c");
         data.put("unifiedClassifier", "6c7ac4b5-67fd-11ee-b5b0-005056013b0c");
         data.put("name", "Болт 1.1.М20 х 800. ВСт3пс2 ГОСТ 24379.1-2012");

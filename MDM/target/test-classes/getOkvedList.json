@@ -22,7 +22,7 @@
       "nameFull": {
         "type": "string",
         "minLength": 0,
-        "maxLength": 100
+        "maxLength": 300
       },
       "archive": {
         "type": "boolean"

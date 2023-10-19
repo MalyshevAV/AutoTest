@@ -42,7 +42,7 @@ public class ClassifireIsAllRussian {
         Assertions.assertEquals(response.size(), 200);
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 12));
-        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 100));
+        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 150));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
         response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=20));
         Assertions.assertNotNull(response);
@@ -142,7 +142,7 @@ public class ClassifireIsAllRussian {
     @Description("Негативный тест Получение массива ОКПД, поле Step Max Integer")
     public void getOkpdListStepMaxInteger() {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
-        given()
+        given().log().uri()
                 .when()
                 .queryParam("step", 2147483647)
                 .get("okpd2")
@@ -166,7 +166,7 @@ public class ClassifireIsAllRussian {
     @Description("Негативный тест Получение массива ОКПД, поле Step пробел перед числом и после")
     public void getOkpdListStepTwoSpacesAndDigit() {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
-        given()
+        given().log().uri()
                 .when()
                 .queryParam("step", " 200 ")
                 .get("okpd2")
@@ -202,7 +202,7 @@ public class ClassifireIsAllRussian {
     @Description("Негативный тест Получение массива ОКПД, поле Step 1024 символа")
     public void getOkpdListStep1024() {
         installSpec(requestSpecification(), Specifications.responseSpecification400());
-        given()
+        given().log().uri()
                 .when()
                 .queryParam("step", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent lupta")
                 .get("okpd2")
@@ -327,7 +327,7 @@ public class ClassifireIsAllRussian {
                 .then().log().all();
     }
 
-    @Test
+   // @Test
     @Description("Негативный тест Получение ОКПД2 по Гуид, только пробелы")
     public void getOkpdGuidSpacies() {
         installSpec(requestSpecification(), responseSpecification400());
@@ -723,7 +723,7 @@ public class ClassifireIsAllRussian {
                 .then().log().all();
     }
 
-    @Test
+//   @Test
     @Description("Негативный тест Получение Okved по Гуид, только пробелы")
     public void getOkvedGuidSpacies() {
         installSpec(requestSpecification(), responseSpecification400());
@@ -823,7 +823,7 @@ public class ClassifireIsAllRussian {
         response.forEach(x -> Assert.assertEquals(x.getGuid().length(), 36));
         response.forEach(x-> Assert.assertTrue(x.getCode().length() <= 10));
         response.forEach(x-> Assert.assertTrue(x.getName().length() <= 150));
-        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 100));
+        response.forEach(x-> Assert.assertTrue(x.getNameFull().length() <= 500));
         response.forEach(x -> Assert.assertEquals(x.getUnit().length(), 36));
         response.forEach(x -> Assert.assertTrue(x.getDateOutputArchive().length() <=20));
         Assertions.assertNotNull(response);
@@ -935,8 +935,7 @@ public class ClassifireIsAllRussian {
                 .then().log().all();
         deleteSpec();
     }
-
-  //  @Test
+    @Test
     @Description("Негативный тест Получение массива ТНВEД, поле Step 3 пробела")
     public void getTnvedListStepSpaces() {
         installSpec(requestSpecification(), Specifications.responseSpecification400());

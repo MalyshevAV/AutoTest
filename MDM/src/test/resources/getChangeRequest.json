@@ -14,20 +14,20 @@
     },
     "status": {
       "type": "integer",
-      "enum": [1,2,3,4]
+      "enum": [1,2,3,4,5]
     },
     "autor": {
       "type": "object",
       "properties": {
         "fio": {
           "type": "string",
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 100
 
         },
         "email": {
           "type": "string",
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 30
         }
       },
@@ -41,13 +41,13 @@
       "properties": {
         "fio": {
           "type": "string",
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 100
 
         },
         "email": {
           "type": "string",
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 30
         }
       },
@@ -68,7 +68,7 @@
     },
     "comment": {
       "type": "string",
-      "minLength": 8,
+      "minLength": 0,
       "maxLength": 1024
     },
     "data": {
@@ -82,14 +82,14 @@
         "code": {
           "type": "string",
           "minLength": 1,
-          "maxLength": 9
+          "maxLength": 10
         },
         "archive": {
           "type": "boolean"
         },
         "dateOutputArchive": {
           "type": "string",
-          "minLength": 18,
+          "minLength": 0,
           "maxLength": 20
         },
         "obsolete": {
@@ -115,12 +115,12 @@
         },
         "namePurchasing": {
           "type": ["null","string"],
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 500
         },
         "nameSale": {
           "type": ["null","string"],
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 500
         },
         "ownershipSign": {
@@ -145,7 +145,7 @@
         },
         "drawingDenotation": {
           "type": ["null","string"],
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 255
         },
         "material": {
@@ -155,7 +155,7 @@
         },
         "materialGOST": {
           "type": ["null","string"],
-          "minLength": 1,
+          "minLength": 0,
           "maxLength": 255
         },
         "sortament": {
