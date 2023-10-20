@@ -1,4 +1,9 @@
 name: myfirstAcnions
+env:
+ APPLICATION_NAME  : "myFlask"
+ PACKAGE_NAME      : "flask-deploy-ver-${{ github.sha }}"
+
+
 on:
  push:
     branches:
@@ -9,6 +14,15 @@ jobs:
     steps: 
     - name: Print Hello 
       run: echo "Hello World from tasting"
+     
+    - name: Execute few commands 
+      run: |
+         echo: "Print1"
+         echo: "Print2"
+         echo: "Print3"
+         echo: "application name: ${{ env.APPLICATION_NAME }}"
+
+      
     
   myDeploy:
    runs-on: ubuntu-latest
@@ -16,4 +30,11 @@ jobs:
    steps: 
    - name: Print from my Deploy
      run: echo "Hello deploy"
+     
+   - name: Execute Deploy 
+     run: |
+         echo: "Print1"
+         echo: "Print2"
+         echo: "Print3"
+         echo: "application name: ${{ env.PACKAGE_NAME }}"
    
