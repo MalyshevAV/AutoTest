@@ -32,8 +32,8 @@ jobs:
      
    - name: Execute Deploy 
      run: |
-         echo: "Print4"
-         echo: "Print6"
-         echo: "Print7"
-         echo: "Application name: ${{ env.PACKAGE_NAME }}"
+         echo "Print4"
+         echo "Print6"
+         echo "Print7"
+         echo "Application name: ${{ env.PACKAGE_NAME }}"
    
