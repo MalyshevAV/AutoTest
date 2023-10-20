@@ -20,9 +20,13 @@ jobs:
          echo "Print1"
          echo "Print2"
          echo "Application name: ${{ env.APPLICATION_NAME }}"
-
+    - name: Open folder  
+      run: ls -la
+    - name: Git clone my repository  
+      uses: actions/checkout@v1
+    - name: Open folder  
+      run: ls -la
       
-    
   myDeploy:
    runs-on: ubuntu-latest
    needs: [myTesting]
@@ -36,4 +40,10 @@ jobs:
          echo "Print6"
          echo "Print7"
          echo "Application name: ${{ env.PACKAGE_NAME }}"
+
+   - name: test packeges if they here
+     run: echo aws --version
+
+   - name: has Package
+     run: echo zip
    
