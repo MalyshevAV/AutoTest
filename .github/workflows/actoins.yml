@@ -20,7 +20,7 @@ jobs:
          echo: "Print1"
          echo: "Print2"
          echo: "Print3"
-         echo: "application name: ${{ env.APPLICATION_NAME }}"
+         echo: "Application name: ${{ env.APPLICATION_NAME }}"
 
       
     
@@ -36,5 +36,5 @@ jobs:
          echo: "Print4"
          echo: "Print6"
          echo: "Print7"
-         echo: "application name: ${{ env.PACKAGE_NAME }}"
+         echo: "Application name: ${{ env.PACKAGE_NAME }}"
    
