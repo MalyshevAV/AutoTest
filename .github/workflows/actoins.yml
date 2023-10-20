@@ -26,6 +26,10 @@ jobs:
       uses: actions/checkout@v1
     - name: Open folder  
       run: ls -la
+    - name: install dependency  
+      run: npm ci
+    - name: Test 
+      run: npm run test
       
   myDeploy:
    runs-on: ubuntu-latest
