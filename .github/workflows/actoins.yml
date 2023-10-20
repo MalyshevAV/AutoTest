@@ -18,8 +18,6 @@ jobs:
     - name: Execute few commands 
       run: |
          echo: "Print1"
-         echo: "Print2"
-         echo: "Print3"
          echo: "Application name: ${{ env.APPLICATION_NAME }}"
 
       
