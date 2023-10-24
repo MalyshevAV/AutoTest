@@ -12,7 +12,7 @@ jobs:
         with: 
           distribution: 'zulu'
           java-version: '17'
-      - run: ./mvn clean test  
+      - run: mvn clean test  
       - name: Copy History
         uses: actions/checkout@v2
         if: always()
