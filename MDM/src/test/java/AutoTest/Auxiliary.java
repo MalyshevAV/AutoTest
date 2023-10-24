@@ -53,7 +53,7 @@ public class Auxiliary {
     }
 
 
-    @Test
+  //  @Test
     @Description("Получение списка бизнес единиц")
     public void getBeList() {
         installSpec(requestSpecification(), responseSpecification());

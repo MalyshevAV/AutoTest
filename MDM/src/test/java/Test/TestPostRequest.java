@@ -80,7 +80,7 @@ public class TestPostRequest {
     UUID uuid = UUID.randomUUID();
 
     @Test(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
-    @Description("Создаем заявку запрос существующей записи в МДМ и изменение   Тип = 0, 2")
+    @Description("Создаем заявку запрос существующей записи в МДМ и изменение  Тип = 0, 2")
     public void postNomenclatureChangeRequestMapRequired(int type) {
         installSpec(requestSpecification(), responseSpecification());
         HashMap<String, Object> postNomenclature = new HashMap<>();
@@ -123,7 +123,7 @@ public class TestPostRequest {
     }
 
     @Test//(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
-    @Description("Создаем заявку запрос существующей записи в МДМ   Тип = 1")
+    @Description("Создаем заявку Формирование заявки на добавление записи   Тип = 1")
     public void postNomenclatureChangeRequestMapType1() {
         installSpec(requestSpecification(), responseSpecification());
         HashMap<String, Object> postNomenclature = new HashMap<>();
@@ -234,7 +234,7 @@ public class TestPostRequest {
                 .body("result", equalTo("ok"));
     }
     @Test
-    @Description("Создаем заявку Запрос и изменение с обязательними полями Тип = 1")
+    @Description("Формирование заявки на добавление записи с обязательними полями Тип = 1")
     public void postNomenclatureChangeRequestMapType1_RequiredFields() {
         installSpec(requestSpecification(), responseSpecification());
         HashMap<String, Object> postNomenclature = new HashMap<>();
@@ -345,7 +345,7 @@ public class TestPostRequest {
     }
 
     @Test//(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
-    @Description("Создаем заявку запрос существующей записи в МДМ с минимальным количеством Тип = 1")
+    @Description("Формирование заявки на добавление записи с минимальным количеством Тип = 1")
     public void postNomenclatureChangeRequestMinMapType1() {
         installSpec(requestSpecification(), responseSpecification());
         HashMap<String, Object> postNomenclature = new HashMap<>();
@@ -465,7 +465,7 @@ public class TestPostRequest {
 
 
     @Test//(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
-    @Description("Создаем заявку c Максимальным значением в атрибутах Тип = 1")
+    @Description("Формирование заявки на добавление записи c Максимальным значением в атрибутах Тип = 1")
     public void postNomenclatureChangeRequestMax() {
         installSpec(requestSpecification(), responseSpecification());
         HashMap<String, Object> postNomenclature = new HashMap<>();
@@ -587,7 +587,7 @@ public class TestPostRequest {
 
 
     @Test//(dataProvider = "type", dataProviderClass = GetPositivedataprovider.class)
-    @Description("Создаем заявку c Макс+1 в атрибутах Тип = 1")
+    @Description("Формирование заявки на добавление записи c Макс+1 в атрибутах Тип = 1")
     public void postNomenclatureChangeRequestMaxPlus1Type1() {
         installSpec(requestSpecification(), responseSpecification400());
         HashMap<String, Object> postNomenclature = new HashMap<>();
@@ -695,7 +695,7 @@ public class TestPostRequest {
                 .body("guid", is(nullValue()));
     }
     @Test
-    @Description("Создаем заявку Запрос и изменение с пустыми обязательними полями Тип = 1")
+    @Description("Формирование заявки на добавление записис пустыми обязательними полями Тип = 1")
     public void postNomenclatureChangeRequestMapType1_RequiredFieldsIsEmpty() {
         installSpec(requestSpecification(), responseSpecification400());
         HashMap<String, Object> postNomenclature = new HashMap<>();
@@ -810,7 +810,7 @@ public class TestPostRequest {
                 .body("result", equalTo("ok"));
     }
     @Test
-    @Description("Создаем заявку изменение с дополнительным полем полями Тип = 1")
+    @Description("Формирование заявки на добавление записи с дополнительным полем полями Тип = 1")
     public void postNomenclatureChangeRequestMapType1_ExtraRequiredFields() {
         installSpec(requestSpecification(), responseSpecification());
         HashMap<String, Object> postNomenclature = new HashMap<>();

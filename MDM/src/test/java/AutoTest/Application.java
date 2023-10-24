@@ -41,7 +41,7 @@ public class Application {
     }
 
     @Test (dataProvider = "guidNegative", dataProviderClass = Nomenclature.class)
-    @Description("Негативные тесты Получение измеений по заявке по Гуид ")
+    @Description("Негативные тесты Получение изменеий по заявке по Гуид ")
     public void getChangeRequestGuidNegative(Object guid) {
         installSpec(requestSpecification(), responseSpecification400());
         given()
