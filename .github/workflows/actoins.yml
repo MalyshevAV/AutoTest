@@ -1,35 +1,35 @@
-# name: myfirstAcnions
-# on:
-#  push:
-#     branches:
-#       - main
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps: 
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-java@v2
-#         with: 
-#           distribution: 'zulu'
-#           java-version: '17'
-#       - run: mvn clean test  
-#       - name: Copy History
-#         uses: actions/checkout@v2
-#         if: always()
-#         with:
-#           ref: gh-pages
-#           path: gh-pages
-#       - name: Build report 
-#         uses: simple-elf/allure-report-action@master
-#         if: always()
-#         with:
-#           allure_results: build/allure-results
-#           allure_history: allure-history
-#           keep_reports: '20'
-#       - name: Publish report
-#         if: always()
-#         uses: peaceiris/actions-gh-pages@v2
-#         env:
-#            PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#            PUBLISH_BRANCH: gh-pages
-#            PUBLISH_DIR: allure-history
+name: myfirstAcnions
+on:
+ push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with: 
+          distribution: 'zulu'
+          java-version: '17'
+      - run: mvn clean test  
+      - name: Copy History
+        uses: actions/checkout@v2
+        if: always()
+        with:
+          ref: gh-pages
+          path: gh-pages
+      - name: Build report 
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: build/allure-results
+          allure_history: allure-history
+          keep_reports: '20'
+      - name: Publish report
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           PUBLISH_BRANCH: gh-pages
+           PUBLISH_DIR: allure-history
